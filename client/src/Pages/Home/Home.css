@@ -1,0 +1,213 @@
+.home {
+  height: fit-content;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+}
+
+.home-container {
+  height: fit-content;
+  width: 80%;
+  margin: 100px 0px 50px 0px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+}
+
+.home-container .home-upper {
+  text-align: center;
+  width: 100%;
+}
+
+.home-container .home-upper h1 {
+  font-size: 4.5rem;
+  line-height: 5rem;
+  font-weight: 400;
+  color: white;
+  letter-spacing: 0.1rem;
+}
+
+.home-container .home-bottom {
+  width: 550px;
+  height: 70px;
+  border-radius: 10px;
+  padding: 10px 30px;
+  background-color: rgba(255, 255, 255, 0.075);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.562);
+  border-right: 1px solid rgba(255, 255, 255, 0.747);
+  backdrop-filter: blur(10px);
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+.home-container .home-bottom input {
+  height: 90%;
+  width: 75%;
+  background-color: transparent;
+  padding-left: 20px;
+  color: white;
+  border: none;
+  border-right: 1px solid white;
+  outline: none;
+}
+
+.home-container .home-bottom button {
+  height: 40px;
+  width: 75px;
+  border-radius: 30px;
+  border: 1px solid white;
+  cursor: pointer;
+}
+
+.home .home-container > p {
+  width: 50vw;
+  color: white;
+  line-height: 2rem;
+  text-align: center;
+}
+
+
+
+.loader {
+  width: 40px;
+  aspect-ratio: 1;
+  display: grid;
+}
+.loader::before,
+.loader::after {    
+  content:"";
+  grid-area: 1/1;
+  --c:no-repeat radial-gradient(farthest-side,#ffffff 92%,#0000);
+  background: 
+    var(--c) 50%  0, 
+    var(--c) 50%  100%, 
+    var(--c) 100% 50%, 
+    var(--c) 0    50%;
+  background-size: 9px 9px;
+  animation: l12 1s infinite;
+}
+.loader::before {
+  margin: 4px;
+  filter: hue-rotate(45deg);
+  background-size: 5px 5px;
+  animation-timing-function: linear
+}
+
+@keyframes l12 { 
+  100%{transform: rotate(.5turn)}
+}
+
+.home .home-section{
+  display: flex;
+  height: fit-content;
+  width: 800px;
+  margin-bottom: 50px;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.home .highlight{
+  color:rgb(0, 85, 212);
+}
+
+.home .home-section h4{
+  color: white;
+  font-weight: 500;
+}
+
+.home .home-section p{
+  color: white;
+}
+
+.home .home-row{
+  width: 500px;
+  height: fit-content;
+  display: flex;
+  color: white;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 50px;
+}
+
+.home .row{
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 20px;
+  width: 800px;
+  color: white;
+}
+
+.home .home-box{
+  width: 700px;
+  height: fit-content;
+  display: flex;
+  flex-wrap: wrap;
+  color: white;
+  gap: 5px;
+}
+
+.home .home-git-container{
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  color: white;
+}
+
+.home .git-card{
+  width: 350px;
+  height: fit-content;
+  display: flex;
+  background-color: rgba(0, 0, 0, 0.164);
+  flex-direction: column;
+  gap: 8px;
+  padding: 10px;
+}
+
+.home .git-card .card-head{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.home .git-card .card-bottom{
+  display: flex;
+  color: white;
+  align-items: center;
+  gap: 15px;
+}
+
+@media (max-width:800px) {
+  .home .home-container h1{
+    font-size: 2.5rem;
+    line-height: 3.5rem;
+  }
+ .home-container .home-bottom {
+  width: 90vw;
+  height: 50px;
+  gap: 5px;
+  justify-content: space-between;
+  padding: 10px 5px;
+}
+ .home-container .home-bottom button{
+  height: fit-content;
+  padding: 5px 0px;
+ }
+
+ .home .home-section{
+  width: 95vw;
+ }
+
+ .home .row{
+  width:95vw;
+ }
+
+ .home .home-section .home-row{
+  width:100%;
+ }
+
+}

@@ -1,0 +1,15 @@
+*{
+  padding: 0px;
+  margin: 0px;
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  scroll-behavior: smooth;
+}
+
+
+body{
+  height: 100vh;
+  overflow-x: hidden;
+  width: 100vw;
+}
+
+

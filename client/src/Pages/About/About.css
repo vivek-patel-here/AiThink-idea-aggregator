@@ -1,0 +1,32 @@
+.about{
+    width: 100vw;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+.about .abt-hero{
+    margin-top: 100px;
+    height: 50px;
+    width: 80vw;
+    display: grid;
+    place-items: center;
+    color: white;
+}
+
+.about .abt-content{
+    width: 750px;
+    color: white;
+    margin-bottom: 30px;
+}
+
+@media (max-width:750px) {
+    .about{
+        width: 100vw;
+    }
+    .about .abt-hero , .about>.abt-content{
+        width: 95vw;
+    }
+}

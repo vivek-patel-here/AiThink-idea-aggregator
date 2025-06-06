@@ -1,0 +1,22 @@
+.demo {
+  width: 100vw;
+  height: fit-content;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+}
+
+.demo .demo-hero{
+    margin-top: 100px;
+    height: 100px;
+    width: 750px;
+    color: white;
+   
+}
+
+.demo .demo-content{
+    width: 750px;
+    color: white;
+    margin-bottom: 30px;
+}

@@ -1,0 +1,181 @@
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 700px;
+  position: fixed;
+  top: 2%;
+  border-radius: 60px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.349);
+  border-right: 1px solid rgba(255, 255, 255, 0.349);
+  height: 55px;
+  background-color: rgb(22, 22, 22);
+  backdrop-filter: blur(10px);
+  padding: 0px 10px;
+  z-index: 100;
+  box-shadow: 5px 5px 15px rgba(255, 255, 255, 0.24);
+}
+
+.navbar ul {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  margin: 0px 20px;
+  height: 40px;
+  justify-content: center;
+}
+
+.navbar ul li {
+  list-style: none;
+  height: 35px;
+  width: 100px;
+  color: white;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border-radius: 35px;
+}
+.navbar ul li a {
+  text-decoration: none;
+  color: white;
+}
+
+.nav-icon {
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  background-color: #fff;
+  font-size: 1.6rem;
+  transition: transform 0.2s ease-in-out;
+}
+
+.navbar .nav-icon:hover {
+  transform: rotate(180deg);
+}
+
+.navbar button {
+  height: 40px;
+  width: 150px;
+  border: none;
+  outline: none;
+  background-color: #fff;
+  cursor: pointer;
+  font-weight: 500;
+  position: relative;
+  overflow: hidden;
+  font-size: 1rem;
+  border-radius: 40px;
+}
+
+.navbar li > .inner {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  background-color: rgb(22, 22, 22);
+  display: grid;
+  place-items: center;
+  color: white;
+  z-index: 1;
+  cursor: pointer;
+  top: 100%;
+  left: 0%;
+  transition: top 0.2s linear;
+}
+
+.navbar button > .inner {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  background-color: white;
+  display: grid;
+  place-items: center;
+  color: black;
+  z-index: 1;
+  cursor: pointer;
+  top: 100%;
+  left: 0%;
+  transition: top 0.2s linear;
+}
+
+.navbar li:hover > .inner {
+  top: 0%;
+}
+
+.navbar button:hover > .inner {
+  top: 0%;
+}
+
+.navbar-resp {
+  display: none;
+}
+
+.navbar-resp > ul {
+  display: none;
+}
+
+@media (max-width: 710px) {
+  .navbar {
+    display: none;
+  }
+  .navbar-resp input#toggle {
+    display: none;
+  }
+  .navbar-resp {
+    display: flex;
+    z-index: 100;
+    align-items: center;
+    justify-content: space-between;
+    width: 100vw;
+    position: fixed;
+    top: 0%;
+    height: fit-content;
+    background-color: transparent;
+    backdrop-filter: blur(10px);
+    padding: 10px 30px;
+  }
+
+  #toggle:checked ~ ul {
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    flex-direction: column;
+    align-items: center;
+    justify-content: start;
+    position: relative;
+    gap: 10px;
+  }
+  #menu {
+    color: white;
+    font-size: 1.2rem;
+    cursor: pointer;
+  }
+
+  #toggle:checked ~ #menu {
+    display: none;
+  }
+
+  .navbar-resp ul > .close-btn {
+    position: absolute;
+    top: 0%;
+    font-size: 1.5rem;
+    right: 0%;
+    color: white;
+    cursor: pointer;
+  }
+
+  .navbar-resp > ul > li {
+    list-style: none;
+  }
+  .navbar-resp ul li a {
+    color: white;
+    text-decoration: none;
+  }
+  .navbar-resp ul li a:hover {
+    text-shadow: 0px 0px 20px white;
+  }
+}
