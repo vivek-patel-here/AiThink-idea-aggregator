@@ -27,7 +27,7 @@ const RegisterLogic = async (req, res) => {
 
   if (!registeredUser) {
     return res
-      .statue(500)
+      .status(500)
       .json({ success: false, message: "Registration failed" });
   }
 
@@ -69,7 +69,7 @@ const loginLogic = async (req, res) => {
 
   if (!isCredentialtrue) {
     return res
-      .statue(400)
+      .status(400)
       .json({ success: false, message: "Wrong Credential!" });
   }
 
@@ -100,7 +100,7 @@ const LogoutLogic = async (req, res) => {
     sameSite: "None",
     secure: true,
   });
-  res.json({ success: true, message: "Logged out successfully!" });
+  res.status(200).json({ success: true, message: "Logged out successfully!" });
 };
 
 module.exports = { loginLogic, RegisterLogic, LogoutLogic };
