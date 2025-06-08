@@ -24,17 +24,21 @@ function Home() {
     try {
       setQuery("");
       setWait(true);
-      const response = await fetch("https://aithink-idea-aggregator-server.onrender.com/idea/new", {
-        method: "POST",
-        headers: {
-          "content-Type": "application/json",
-        },
-        body: JSON.stringify({ query: query }),
-        credentials: "include",
-      });
+      const response = await fetch(
+        "https://aithink-idea-aggregator-server.onrender.com/idea/new",
+        {
+          method: "POST",
+          headers: {
+            "content-Type": "application/json",
+          },
+          body: JSON.stringify({ query: query }),
+          credentials: "include",
+        }
+      );
 
       const parsedResponse = await response.json();
       if (!response.ok || parsedResponse.success === false) {
+        setWait(false);
         return ErrMsg("Unable to process your request.Try Again");
       }
       setWait(false);
@@ -52,183 +56,187 @@ function Home() {
 
   return (
     <>
-    <div className="home">
-      <Navbar />
-      <div className="home-container">
-        <div className="home-upper">
-          <h1>Revo<span className="blue">lution</span>izing</h1>
-          <h1>Brainstromi<span className="blue">ng with</span> AI</h1>
+      <div className="home">
+        <Navbar />
+        <div className="home-container">
+          <div className="home-upper">
+            <h1>
+              Revo<span className="blue">lution</span>izing
+            </h1>
+            <h1>
+              Brainstromi<span className="blue">ng with</span> AI
+            </h1>
+          </div>
+          <p>
+            Turn your problems into powerful projects. Discover trending ideas
+            and real-world solutions powered by AI from GitHub, Reddit, and
+            Twitter.
+          </p>
+          <form className="home-bottom" onSubmit={handleSubmit}>
+            <input
+              placeholder="Got an idea? Let's explore it!"
+              type="text"
+              name="query"
+              required
+              value={query}
+              onChange={handleChange}
+            />
+            {!wait && <button>Get Ideas</button>}
+            {wait && <div className="loader"></div>}
+          </form>
         </div>
-        <p>
-          Turn your problems into powerful projects. Discover trending ideas and
-          real-world solutions powered by AI from GitHub, Reddit, and Twitter.
-        </p>
-        <form className="home-bottom" onSubmit={handleSubmit}>
-          <input
-            placeholder="Got an idea? Let's explore it!"
-            type="text"
-            name="query"
-            required
-            value={query}
-            onChange={handleChange}
-          />
-          {!wait && <button>Get Ideas</button>}
-          {wait && <div className="loader"></div>}
-        </form>
+
+        {/* *************keywords************** */}
+        {keywords.length !== 0 && (
+          <div className="row">
+            <h4>RELATED KEYWORDS :</h4>
+            <Stack direction="row" spacing={1}>
+              {keywords.map((word, i) => {
+                return (
+                  <Chip
+                    label={word.toUpperCase()}
+                    color="primary"
+                    variant="outlined"
+                    key={i}
+                  />
+                );
+              })}
+            </Stack>
+          </div>
+        )}
+
+        {/* *************Ideas************** */}
+
+        {ideas.length !== 0 && (
+          <div className="home-section">
+            <h4>RELATED IDEAS :</h4>
+            <div className="home-row">
+              {ideas.map((post, i) => {
+                return (
+                  <div className="home-box" key={i}>
+                    <h3>{post.title}</h3>
+                    <p>
+                      <span className="highlight">Problem</span> :{" "}
+                      {post.problemSolved}
+                    </p>
+                    <p>
+                      <span className="highlight">Solution</span> :{" "}
+                      {post.description}
+                    </p>
+                    <p>
+                      <span className="highlight">Tech Stack</span> :{" "}
+                      {post.tech_Stack}
+                    </p>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        )}
+
+        {/* ************github repos************** */}
+
+        {topRepos.length !== 0 && (
+          <div className="home-section">
+            <h4>RELATED GitHub Repositories :</h4>
+            <div className="home-git-container">
+              {topRepos.map((repo, indx) => {
+                return (
+                  <Postcard
+                    key={indx}
+                    name={repo.name}
+                    owner={repo.owner}
+                    link={repo.link}
+                    status={repo.visibility}
+                    star={repo.stars}
+                    watch={repo.watchers}
+                    isX={false}
+                  />
+                );
+              })}
+            </div>
+          </div>
+        )}
+
+        {/* ************X posts************** */}
+
+        {xpost.length !== 0 && (
+          <div className="home-section">
+            <h4>RELATED Top X Posts :</h4>
+            <div className="home-git-container">
+              {xpost.map((post, i) => {
+                return (
+                  <Postcard
+                    name={post.title}
+                    owner={post.author}
+                    link={post.link}
+                    status={null}
+                    star={null}
+                    key={i}
+                    watch={null}
+                    isX={true}
+                  />
+                );
+              })}
+            </div>
+          </div>
+        )}
+
+        {/* ************reddit  posts************** */}
+        {redditPost.length !== 0 && (
+          <div className="home-section">
+            <h4>RELATED Top Reddit posts :</h4>
+            <div className="home-git-container">
+              {redditPost.map((post, i) => {
+                return (
+                  <Postcard
+                    name={post.title}
+                    owner={post.author}
+                    link={post.link}
+                    status={null}
+                    star={null}
+                    key={i}
+                    watch={null}
+                    isX={false}
+                  />
+                );
+              })}
+            </div>
+          </div>
+        )}
       </div>
-
-      {/* *************keywords************** */}
-      {keywords.length !== 0 && (
-        <div className="row">
-          <h4>RELATED KEYWORDS :</h4>
-          <Stack direction="row" spacing={1}>
-            {keywords.map((word, i) => {
-              return (
-                <Chip
-                  label={word.toUpperCase()}
-                  color="primary"
-                  variant="outlined"
-                  key={i}
-                />
-              );
-            })}
-          </Stack>
-        </div>
-      )}
-
-      {/* *************Ideas************** */}
-
-      {ideas.length !== 0 && (
-        <div className="home-section">
-          <h4>RELATED IDEAS :</h4>
-          <div className="home-row">
-            {ideas.map((post, i) => {
-              return (
-                <div className="home-box" key={i}>
-                  <h3>{post.title}</h3>
-                  <p>
-                    <span className="highlight">Problem</span> :{" "}
-                    {post.problemSolved}
-                  </p>
-                  <p>
-                    <span className="highlight">Solution</span> :{" "}
-                    {post.description}
-                  </p>
-                  <p>
-                    <span className="highlight">Tech Stack</span> :{" "}
-                    {post.tech_Stack}
-                  </p>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      )}
-
-      {/* ************github repos************** */}
-
-      {topRepos.length !== 0 && (
-        <div className="home-section">
-          <h4>RELATED GitHub Repositories :</h4>
-          <div className="home-git-container">
-            {topRepos.map((repo, indx) => {
-              return (
-                <Postcard
-                key={indx}
-                  name={repo.name}
-                  owner={repo.owner}
-                  link={repo.link}
-                  status={repo.visibility}
-                  star={repo.stars}
-                  watch={repo.watchers}
-                  isX={false}
-                />
-              );
-            })}
-          </div>
-        </div>
-      )}
-
-      {/* ************X posts************** */}
-
-      {xpost.length!==0 && (
-        <div className="home-section">
-          <h4>RELATED Top X Posts :</h4>
-          <div className="home-git-container">
-           {
-            xpost.map((post,i)=>{
-              return (
-                <Postcard
-                  name={post.title}
-                  owner={post.author}
-                  link={post.link}
-                  status={null}
-                  star={null}
-                  key={i}
-                  watch={null}
-                  isX={true}
-                />
-              );
-            })
-           }
-          </div>
-        </div>
-      )}
-
-      {/* ************reddit  posts************** */}
-      {redditPost.length !== 0 && (
-        <div className="home-section">
-          <h4>RELATED Top Reddit posts :</h4>
-          <div className="home-git-container">
-            {redditPost.map((post, i) => {
-              return (
-                <Postcard
-                  name={post.title}
-                  owner={post.author}
-                  link={post.link}
-                  status={null}
-                  star={null}
-                  key={i}
-                  watch={null}
-                  isX={false}
-                />
-              );
-            })}
-          </div>
-        </div>
-      )}
-    </div>
-    <Footer/>
+      <Footer />
     </>
   );
 }
 
-function Postcard({ name, owner, link, status, star, watch ,isX}) {
+function Postcard({ name, owner, link, status, star, watch, isX }) {
   return (
     <div className="git-card">
       <div className="card-head">
-        <p>{status &&   <i className="ri-github-fill"></i>} {owner}
-        {isX && <i className="ri-twitter-x-line"></i>}</p>
+        <p>
+          {status && <i className="ri-github-fill"></i>} {owner}
+          {isX && <i className="ri-twitter-x-line"></i>}
+        </p>
         <p>
           {star} {star && <i className="ri-star-s-fill"></i>}{" "}
           {!status && !isX && <i className="ri-reddit-line"></i>}
         </p>
       </div>
-      <div className="card-body">
-     {name}
-      </div>
+      <div className="card-body">{name}</div>
 
       <div className="card-bottom">
         <a href={link}>
           <Chip color="primary" label="Link" size="small" />
         </a>
         <p>{status}</p>
-        <p>{watch}{watch && <i className="ri-eye-fill"></i>}</p>
+        <p>
+          {watch}
+          {watch && <i className="ri-eye-fill"></i>}
+        </p>
       </div>
     </div>
   );
 }
-
-
 
 export default Home;
