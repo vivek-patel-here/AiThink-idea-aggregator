@@ -2,7 +2,7 @@
 
 A sleek, full-stack web app that brings together top tech ideas from GitHub, X (formerly Twitter), Reddit, and more—making it easier for developers and enthusiasts to stay inspired and discover what's trending in the world of tech and AI.
 
-![Screenshot](./client/public/demo3.PNG)
+![Screenshot](./client/public/readmeDemo.PNG.PNG)
 
 ##  Features
 
