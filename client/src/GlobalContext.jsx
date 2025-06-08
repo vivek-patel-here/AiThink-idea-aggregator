@@ -5,6 +5,8 @@ const GlobalContext = createContext();
 
 const GlobalContextProvider = ({ children }) => {
   const [isAuth, setIsAuth] = useState(false);
+  const [open,setOpen] =useState(false);
+
   const ErrMsg = (msg) => {
     return toast.error(msg, {
       position: "top-right",
@@ -81,7 +83,7 @@ const GlobalContextProvider = ({ children }) => {
 
   return (
     <GlobalContext.Provider
-      value={{ isAuth, setIsAuth, ErrMsg, successMsg, LogoutHandler }}
+      value={{ isAuth, setIsAuth, ErrMsg, successMsg, LogoutHandler ,open ,setOpen}}
     >
       {children}
     </GlobalContext.Provider>

@@ -3,56 +3,55 @@ import "./Navbar.css";
 import { useContext, useState } from "react";
 import GlobalContext from "../../GlobalContext";
 function Navbar() {
-  const { LogoutHandler } = useContext(GlobalContext);
-  const [open,setOpen] =useState(false);
+  const { LogoutHandler, open, setOpen } = useContext(GlobalContext);
   return (
     <>
       <div className="navbar">
-        <div className="nav-icon">
-          <i className="ri-planet-fill"></i>
+        <div className="nav-icon-container">
+          <div className="nav-icon">
+            <i className="ri-planet-fill"></i>
+          </div>
+          <p>AiThink</p>
         </div>
-
         <ul>
           <li>
-            Home
-            <Link to="/home" className="inner">
+            <Link to="/home" >
               Home
             </Link>
           </li>
           <li>
-            About
-            <Link to="/about" className="inner">
+            <Link to="/about" >
               About
             </Link>
           </li>
 
           <li>
-            Demo
-            <Link to="/demo" className="inner">
+            <Link to="/demo" >
               Demo
             </Link>
           </li>
+
+          <li>
+            <a href="#footer">Get In Touch</a>
+          </li>
+
+          <button onClick={LogoutHandler}>
+            Logout
+          </button>
         </ul>
-
-        <button onClick={LogoutHandler}>
-          Logout
-          <div className="inner">Logout</div>
-        </button>
-
-        <button>
-          Get In Touch
-          <div className="inner">Get In Touch</div>
-        </button>
       </div>
       {/*****************responsive design*********************/}
       <div className="navbar-resp">
         <input type="checkbox" id="toggle" />
-        <div className="nav-icon">
-          <i className="ri-planet-fill"></i>
-        </div>
         <ul>
+          <div className="nav-icon-container">
+            <div className="nav-icon">
+              <i className="ri-planet-fill"></i>
+            </div>
+            <p>AiThink</p>
+          </div>
           <label htmlFor="toggle" className="close-btn">
-          <i className="ri-close-circle-fill"></i>
+            <i className="ri-close-circle-fill"></i>
           </label>
           <li>
             <Link to="/home" className="inner">
@@ -75,12 +74,17 @@ function Navbar() {
           </li>
         </ul>
 
-       {!open && <label htmlFor="toggle" id="menu" >
-          <i className="ri-menu-2-line" ></i>
-        </label>}
+        {!open && (
+          
+          <label htmlFor="toggle" id="menu">
+            <i className="ri-menu-2-line"></i>
+          </label>
+        )}
       </div>
     </>
   );
 }
+
+
 
 export default Navbar;

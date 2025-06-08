@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import "./Auth.css";
 import { useNavigate } from "react-router-dom";
 import GlobalContext from "../../GlobalContext";
+import Robot from "../../components/3DRobot/Robot.jsx"
 function Auth() {
   //true ->Sign-In and  false->Sign-Up
   const [pageState, setPageState] = useState(true);
@@ -160,7 +161,11 @@ function Auth() {
         </p>
       </div>
 
-      <div className="auth-right"></div>
+      <div className="auth-right">
+        <h1>Ai Think</h1>
+        <img src="/gradient.png" alt="" />
+        <Robot/>
+      </div>
     </div>
   );
 }

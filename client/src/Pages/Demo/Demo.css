@@ -5,18 +5,50 @@
   flex-direction: column;
   align-items: center;
   gap: 15px;
+  padding-top: 120px;
 }
 
-.demo .demo-hero{
-    margin-top: 100px;
-    height: 100px;
-    width: 750px;
-    color: white;
-   
-}
+
 
 .demo .demo-content{
-    width: 750px;
-    color: white;
-    margin-bottom: 30px;
+    width: 900px;
+  padding: 20px 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  color: white;
+  font-size: 1rem;
+  border-top: 1px solid rgba(128, 128, 128, 0.377);
+}
+
+.demo h3{
+  color:rgb(0, 128, 255);
+}
+
+
+.demo-content img{
+  margin: 20px 10px;
+  width: 80%;
+}
+
+.demo .demo-content ul{
+  display: flex;
+  flex-direction: column;
+  gap: 100px;
+}
+
+.demo li {
+  list-style: none;}
+
+  
+@media (max-width: 750px) {
+  .demo {
+    width: 100vw;
+  }
+  .demo > .demo-content {
+    width: 95vw;
+  }
+  .demo-content ul {
+    flex-direction: column;
+  }
 }

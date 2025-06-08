@@ -15,7 +15,7 @@ import {
 function App() {
   const { isAuth } = useContext(GlobalContext);
   return (
-    <div className={isAuth ? "app-login":"app"}>
+    <div className={isAuth ? "app-login" : "app"}>
       <Routes>
         <Route
           path="/"

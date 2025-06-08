@@ -4,6 +4,7 @@ import Navbar from "../../components/Navbar/Navbar.jsx";
 import GlobalContext from "../../GlobalContext.jsx";
 import Chip from "@mui/material/Chip";
 import Stack from "@mui/material/Stack";
+import Footer from "../../components/Footer/Footer.jsx";
 
 function Home() {
   const [query, setQuery] = useState("");
@@ -49,12 +50,13 @@ function Home() {
   };
 
   return (
+    <>
     <div className="home">
       <Navbar />
       <div className="home-container">
         <div className="home-upper">
-          <h1>Revolutionizing</h1>
-          <h1>Brainstroming with AI</h1>
+          <h1>Revo<span className="blue">lution</span>izing</h1>
+          <h1>Brainstromi<span className="blue">ng with</span> AI</h1>
         </div>
         <p>
           Turn your problems into powerful projects. Discover trending ideas and
@@ -62,7 +64,7 @@ function Home() {
         </p>
         <form className="home-bottom" onSubmit={handleSubmit}>
           <input
-            placeholder="Drop Your Idea here"
+            placeholder="Got an idea? Let's explore it!"
             type="text"
             name="query"
             required
@@ -195,6 +197,8 @@ function Home() {
         </div>
       )}
     </div>
+    <Footer/>
+    </>
   );
 }
 
@@ -206,7 +210,7 @@ function Postcard({ name, owner, link, status, star, watch ,isX}) {
         {isX && <i className="ri-twitter-x-line"></i>}</p>
         <p>
           {star} {star && <i className="ri-star-s-fill"></i>}{" "}
-          {!status && !isX && <i className="ri-discord-fill"></i>}
+          {!status && !isX && <i className="ri-reddit-line"></i>}
         </p>
       </div>
       <div className="card-body">
