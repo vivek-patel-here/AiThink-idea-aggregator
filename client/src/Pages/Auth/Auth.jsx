@@ -23,7 +23,7 @@ function Auth() {
 
   const loginUser = async () => {
     try {
-      const response = await fetch("http://localhost:8080/auth/login", {
+      const response = await fetch("https://aithink-idea-aggregator-server.onrender.com/auth/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -50,7 +50,7 @@ function Auth() {
 
   const signupUser = async () => {
     try {
-      const response = await fetch("http://localhost:8080/auth/register", {
+      const response = await fetch("https://aithink-idea-aggregator-server.onrender.com/auth/register", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

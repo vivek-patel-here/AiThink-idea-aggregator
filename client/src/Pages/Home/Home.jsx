@@ -24,7 +24,7 @@ function Home() {
     try {
       setQuery("");
       setWait(true);
-      const response = await fetch("http://localhost:8080/idea/new", {
+      const response = await fetch("https://aithink-idea-aggregator-server.onrender.com/idea/new", {
         method: "POST",
         headers: {
           "content-Type": "application/json",

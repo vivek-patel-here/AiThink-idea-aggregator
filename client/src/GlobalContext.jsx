@@ -35,7 +35,7 @@ const GlobalContextProvider = ({ children }) => {
 
   const LogoutHandler = async () => {
     try {
-      const response = await fetch("http://localhost:8080/auth/logout", {
+      const response = await fetch("https://aithink-idea-aggregator-server.onrender.com/auth/logout", {
         method: "GET",
         headers: {
           "content-Type": "application/json",

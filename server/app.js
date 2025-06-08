@@ -13,7 +13,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(
   CORS({
-    origin: "http://localhost:5173",
+    origin: "https://aithink-idea-aggregator-client.onrender.com",
     credentials: true,
   })
 );
