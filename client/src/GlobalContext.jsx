@@ -58,7 +58,7 @@ const GlobalContextProvider = ({ children }) => {
   useEffect(() => {
     const checkAuth = async () => {
       try {
-        const response = await fetch("http://localhost:8080/auth/verify", {
+        const response = await fetch("https://aithink-idea-aggregator-server.onrender.com/auth/verify", {
           method: "GET",
           headers: {
             "content-type": "application/json",

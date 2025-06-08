@@ -37,7 +37,6 @@ function Home() {
       if (!response.ok || parsedResponse.success === false) {
         return ErrMsg("Unable to process your request.Try Again");
       }
-      console.log(parsedResponse);
       setWait(false);
       SetKeyword(parsedResponse.keywords);
       setIdeas(parsedResponse.ideas);
@@ -45,6 +44,8 @@ function Home() {
       setXPost(parsedResponse.topXpost);
       setTopRepos(parsedResponse.top_repos);
     } catch (err) {
+      setWait(false);
+
       return ErrMsg("Unable to process your request.Try Again");
     }
   };
