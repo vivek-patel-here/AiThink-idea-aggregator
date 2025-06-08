@@ -33,5 +33,28 @@ A sleek, full-stack web app that brings together top tech ideas from GitHub, X (
 ### 1. Clone the repo
 
 ```bash
-git clone https://github.com/your-username/idea-aggregator.git
-cd idea-aggregator
+git clone https://github.com/vivek-patel-here/AiThink-idea-aggregator
+cd AiThink-idea-aggregator
+
+**Backend setup**
+cd backend
+npm install
+# Add your .env file with API keys and config
+node app.js ( you can use nodemon for development purpose)
+
+**Environment variable setup**
+# .env
+DB_URL="..." //mongodb_uri
+JWT_SECRET="..."
+COOKIE_SECRET="..."
+GEMINI_API_KEY="<Your gemini api key here>"
+GITHUB_TOKEN="<Your Github access token>"
+SERP_API_KEY="<Your Serp_api key >"
+
+
+**FrontEnd setup**
+cd ../client
+npm install 
+npm run dev
+
+
