@@ -11,13 +11,19 @@ const IdeaRoute = require("./Routes/Idea.js")
 //essential middlewares
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser(process.env.COOKIE_SECRET));
 app.use(
   CORS({
     origin: "https://aithink-idea-aggregator-client.onrender.com",
     credentials: true,
   })
 );
-app.use(cookieParser(process.env.COOKIE_SECRET));
+
+app.use((req, res, next) => {
+  res.setHeader("Access-Control-Allow-Credentials", "true");
+  next();
+});
+
 
 //connect to database
 DB_Connect(process.env.DB_URL)
