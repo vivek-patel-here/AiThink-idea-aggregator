@@ -1,6 +1,7 @@
 const { User } = require("../Models/UserModel.js");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const isProduction = process.env.NODE_ENV === "production";
 
 //Register Logic
 const RegisterLogic = async (req, res) => {
@@ -42,8 +43,8 @@ const RegisterLogic = async (req, res) => {
   res.cookie("auth", token, {
     httpOnly: true,
     signed: true,
-    secure: true,
-    sameSite: "None",
+    secure: isProduction, // Only use secure cookies in production
+    sameSite: isProduction ? "None" : "Lax", // Adjust sameSite accordingly
     maxAge: 24 * 60 * 60 * 1000,
   });
 
@@ -84,8 +85,8 @@ const loginLogic = async (req, res) => {
   res.cookie("auth", token, {
     httpOnly: true,
     signed: true,
-    secure: true,
-    sameSite: "None",
+    secure: isProduction, // Only use secure cookies in production
+    sameSite: isProduction ? "None" : "Lax", // Adjust sameSite accordingly
     maxAge: 24 * 60 * 60 * 1000,
   });
 
@@ -97,8 +98,8 @@ const LogoutLogic = async (req, res) => {
   res.clearCookie("auth", {
     httpOnly: true,
     signed: true,
-    sameSite: "None",
-    secure: true,
+    secure: isProduction,
+    sameSite: isProduction ? "None" : "Lax",
   });
   res.status(200).json({ success: true, message: "Logged out successfully!" });
 };
