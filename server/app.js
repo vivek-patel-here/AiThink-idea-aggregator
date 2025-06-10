@@ -11,8 +11,7 @@ const IdeaRoute = require("./Routes/Idea.js")
 //essential middlewares
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(cookieParser());
-// app.use(cookieParser(process.env.COOKIE_SECRET));
+app.use(cookieParser(process.env.COOKIE_SECRET));
 app.use(
   CORS({
     origin: "https://aithink-idea-aggregator-client.onrender.com",

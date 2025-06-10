@@ -42,7 +42,7 @@ const RegisterLogic = async (req, res) => {
 
   res.cookie("auth", token, {
     httpOnly: true,
-    // signed: true,
+    signed: true,
     secure: isProduction, // Only use secure cookies in production
     sameSite: isProduction ? "None" : "Lax", // Adjust sameSite accordingly
     maxAge: 24 * 60 * 60 * 1000,
@@ -84,7 +84,7 @@ const loginLogic = async (req, res) => {
 
   res.cookie("auth", token, {
     httpOnly: true,
-    // signed: true,
+    signed: true,
     secure: isProduction, // Only use secure cookies in production
     sameSite: isProduction ? "None" : "Lax", // Adjust sameSite accordingly
     maxAge: 24 * 60 * 60 * 1000,
@@ -97,7 +97,7 @@ const loginLogic = async (req, res) => {
 const LogoutLogic = async (req, res) => {
   res.clearCookie("auth", {
     httpOnly: true,
-    // signed: true,
+    signed: true,
     secure: isProduction,
     sameSite: isProduction ? "None" : "Lax",
   });
