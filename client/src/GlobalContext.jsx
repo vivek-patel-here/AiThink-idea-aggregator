@@ -6,7 +6,7 @@ const GlobalContext = createContext();
 const GlobalContextProvider = ({ children }) => {
   const [isAuth, setIsAuth] = useState(false);
   const [open,setOpen] =useState(false);
-  const url ="http://localhost:8080"
+  const url ="https://aithink-idea-aggregator-server.onrender.com"
 
   const ErrMsg = (msg) => {
     return toast.error(msg, {

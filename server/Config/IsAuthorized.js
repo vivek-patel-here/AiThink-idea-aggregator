@@ -16,7 +16,7 @@ const IsAuthorized = async (req, res, next) => {
     if (!userfound) {
       return res.status(401).json({
         success: false,
-        message: "Authentication Token is expired .Login again",
+        message: "Authentication token is invalid or expired. Please log in again.",
       });
     }
 
