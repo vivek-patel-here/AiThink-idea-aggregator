@@ -7,7 +7,7 @@ function Auth() {
   //true ->Sign-In and  false->Sign-Up
   const [pageState, setPageState] = useState(true);
   const navigate = useNavigate();
-  const { isAuth, setIsAuth, ErrMsg, successMsg } = useContext(GlobalContext);
+  const { isAuth, setIsAuth, ErrMsg, successMsg,url } = useContext(GlobalContext);
 
   const [credentials, setCredentials] = useState({
     username: "",
@@ -23,7 +23,7 @@ function Auth() {
 
   const loginUser = async () => {
     try {
-      const response = await fetch("https://aithink-idea-aggregator-server.onrender.com/auth/login", {
+      const response = await fetch(`${url}/auth/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -50,7 +50,7 @@ function Auth() {
 
   const signupUser = async () => {
     try {
-      const response = await fetch("https://aithink-idea-aggregator-server.onrender.com/auth/register", {
+      const response = await fetch(`${url}/auth/register`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

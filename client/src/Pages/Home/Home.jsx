@@ -8,7 +8,7 @@ import Footer from "../../components/Footer/Footer.jsx";
 
 function Home() {
   const [query, setQuery] = useState("");
-  const { ErrMsg } = useContext(GlobalContext);
+  const { ErrMsg,url } = useContext(GlobalContext);
   const handleChange = (e) => {
     setQuery(() => setQuery(e.target.value));
   };
@@ -25,7 +25,7 @@ function Home() {
       setQuery("");
       setWait(true);
       const response = await fetch(
-        "https://aithink-idea-aggregator-server.onrender.com/idea/new",
+        `${url}/idea/new`,
         {
           method: "POST",
           headers: {

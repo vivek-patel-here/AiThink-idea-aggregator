@@ -6,6 +6,7 @@ const GlobalContext = createContext();
 const GlobalContextProvider = ({ children }) => {
   const [isAuth, setIsAuth] = useState(false);
   const [open,setOpen] =useState(false);
+  const url ="http://localhost:8080"
 
   const ErrMsg = (msg) => {
     return toast.error(msg, {
@@ -35,7 +36,7 @@ const GlobalContextProvider = ({ children }) => {
 
   const LogoutHandler = async () => {
     try {
-      const response = await fetch("https://aithink-idea-aggregator-server.onrender.com/auth/logout", {
+      const response = await fetch(`${url}/auth/logout`, {
         method: "GET",
         headers: {
           "content-Type": "application/json",
@@ -58,7 +59,7 @@ const GlobalContextProvider = ({ children }) => {
   useEffect(() => {
     const checkAuth = async () => {
       try {
-        const response = await fetch("https://aithink-idea-aggregator-server.onrender.com/auth/verify", {
+        const response = await fetch(`${url}/auth/verify`, {
           method: "GET",
           headers: {
             "content-type": "application/json",
@@ -83,7 +84,7 @@ const GlobalContextProvider = ({ children }) => {
 
   return (
     <GlobalContext.Provider
-      value={{ isAuth, setIsAuth, ErrMsg, successMsg, LogoutHandler ,open ,setOpen}}
+      value={{ isAuth, setIsAuth, ErrMsg, successMsg, LogoutHandler ,open ,setOpen,url}}
     >
       {children}
     </GlobalContext.Provider>

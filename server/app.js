@@ -14,16 +14,10 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser(process.env.COOKIE_SECRET));
 app.use(
   CORS({
-    origin: "*",
+    origin: "http://localhost:5173",
     credentials: true,
   })
 );
-
-app.use((req, res, next) => {
-  res.setHeader("Access-Control-Allow-Credentials", "true");
-  next();
-});
-
 
 //connect to database
 DB_Connect(process.env.DB_URL)

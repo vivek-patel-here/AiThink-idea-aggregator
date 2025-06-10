@@ -1,75 +1,89 @@
 const { GoogleGenerativeAI } = require("@google/generative-ai");
 
 async function fetchTopGitHubRepos(keyword) {
-  const res = await fetch(
-    `https://api.github.com/search/repositories?q=${encodeURIComponent(
-      keyword
-    )}&sort=stars&order=desc`,
-    {
-      method: "GET",
-      headers: {
-        Accept: "application/vnd.github+json",
-        Authorization: `token ${process.env.GITHUB_TOKEN}`,
-      },
-    }
-  );
-  const parsedResponse = await res.json();
-  const topRepos = parsedResponse.items.slice(0, 8).map((repo) => {
-    return {
-      name: repo.full_name,
-      owner: repo.owner.login,
-      link: repo.html_url,
-      visibility: repo.visibility,
-      watchers: repo.watchers_count,
-      stars: repo.stargazers_count,
-    };
-  });
-  return topRepos;
+  try {
+    const res = await fetch(
+      `https://api.github.com/search/repositories?q=${encodeURIComponent(
+        keyword
+      )}&sort=stars&order=desc`,
+      {
+        method: "GET",
+        headers: {
+          Accept: "application/vnd.github+json",
+          Authorization: `token ${process.env.GITHUB_TOKEN}`,
+        },
+      }
+    );
+    const parsedResponse = await res.json();
+    const topRepos = parsedResponse.items.slice(0, 8).map((repo) => {
+      return {
+        name: repo.full_name,
+        owner: repo.owner.login,
+        link: repo.html_url,
+        visibility: repo.visibility,
+        watchers: repo.watchers_count,
+        stars: repo.stargazers_count,
+      };
+    });
+    return topRepos;
+  } catch (err) {
+    return [];
+  }
 }
 
 async function fetchTopRedditPost(keyword) {
-  const res = await fetch(
-    `https://www.reddit.com/search.json?q=${encodeURIComponent(
-      keyword
-    )}&sort=top&t=month`,
-    {
-      method: "GET",
-    }
-  );
-  const parsedResponse = await res.json();
-  const topRedditPost = parsedResponse.data.children.slice(0, 8).map((post) => {
-    return {
-      title: post.data.title,
-      author: post.data.author_fullname,
-      link: post.data.url,
-      bodyContent: post.data.selftext,
-    };
-  });
+  try {
+    const res = await fetch(
+      `https://www.reddit.com/search.json?q=${encodeURIComponent(
+        keyword
+      )}&sort=top&t=month`,
+      {
+        method: "GET",
+      }
+    );
+    const parsedResponse = await res.json();
+    const topRedditPost = parsedResponse.data.children
+      .slice(0, 8)
+      .map((post) => {
+        return {
+          title: post.data.title,
+          author: post.data.author_fullname,
+          link: post.data.url,
+          bodyContent: post.data.selftext,
+        };
+      });
 
-  return topRedditPost;
+    return topRedditPost;
+  } catch (err) {
+    return [];
+  }
 }
 
 async function fetchTopXPost(keyword) {
-  const res = await fetch(
-    `https://serpapi.com/search.json?q=site:twitter.com+${encodeURIComponent(
-      keyword
-    )}&api_key=${process.env.SERP_API_KEY}`,
-    {
-      method: "GET",
-    }
-  );
-  const parsedResponse = await res.json();
-  const topXPosts = parsedResponse.organic_results.map((post) => {
-    return {
-      title: post.title,
-      link: post.link,
-      displayed_link: post.displayed_link,
-      snippet: post.snippet,
-      source: post.source,
-    };
-  });
+  try {
+    const res = await fetch(
+      `https://serpapi.com/search.json?q=site:twitter.com+${encodeURIComponent(
+        keyword
+      )}&api_key=${process.env.SERP_API_KEY}`,
+      {
+        method: "GET",
+      }
+    );
+    const parsedResponse = await res.json();
+    const topXPosts = parsedResponse.organic_results.map((post) => {
+      return {
+        title: post.title,
+        link: post.link,
+        displayed_link: post.displayed_link,
+        snippet: post.snippet,
+        source: post.source,
+      };
+    });
 
-  return topXPosts;
+    return topXPosts;
+  } catch (err) {
+    return [];
+  }
 }
 
 const IdeaAggregateLogic = async (req, res) => {
@@ -119,16 +133,14 @@ const IdeaAggregateLogic = async (req, res) => {
       responseText2 = JSON.parse(responseText2);
     } catch (err) {}
 
-    res
-      .status(200)
-      .json({
-        success: true,
-        keywords,
-        top_repos,
-        topRedditPost,
-        topXpost,
-        ideas: responseText2,
-      });
+    res.status(200).json({
+      success: true,
+      keywords,
+      top_repos,
+      topRedditPost,
+      topXpost,
+      ideas: responseText2,
+    });
   } catch (err) {
     console.error("Gemini Error:", err);
     res.status(500).json({
