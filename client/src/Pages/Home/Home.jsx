@@ -49,7 +49,6 @@ function Home() {
       setTopRepos(parsedResponse.top_repos);
     } catch (err) {
       setWait(false);
-
       return ErrMsg("Unable to process your request.Try Again");
     }
   };
