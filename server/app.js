@@ -14,7 +14,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser(process.env.COOKIE_SECRET));
 app.use(
   CORS({
-    origin: "ai-think-idea-aggregator.vercel.app",
+    origin: "https://ai-think-idea-aggregator.vercel.app",
     credentials: true,
   })
 );
