@@ -57,9 +57,7 @@ cd ../client
 npm install 
 npm run dev
 
-<br><br>
-
-```bash
+<br> <br>
 
 ## Essential setting to bypass browser restriction
 
