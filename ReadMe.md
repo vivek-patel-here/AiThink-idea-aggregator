@@ -57,4 +57,16 @@ cd ../client
 npm install 
 npm run dev
 
+<br><br>
+
+```bash
+
+## Essential setting to bypass browser restriction
+
+### For Google Chrome
+
+- go to chrome://settings/cookies or Settings > Privacy and security > Third-party cookies.
+- Ensure that "Block third-party cookies" or "Block all cookies" is NOT selected.
+- You might need to select "Allow third-party cookies" or, for more fine-grained control, "Block third-party cookies in Incognito" .
+- Then add '[*.]onrender.com' as an allowed site under "Sites that can always use cookies."
 
