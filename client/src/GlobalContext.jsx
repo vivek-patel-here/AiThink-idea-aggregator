@@ -77,6 +77,12 @@ const GlobalContextProvider = ({ children }) => {
         return ErrMsg("Unable to Logout!");
       }
       setIsAuth(false);
+      setIdeas([]);
+      SetKeyword([]);
+      setXPost([]);
+      setRedditPost([]);
+      setTopRepos([]);
+      set_Ideas([]);
       return successMsg(parsedResponse.message);
     } catch (err) {
       return ErrMsg("Unable to Logout!");
