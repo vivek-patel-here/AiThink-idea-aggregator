@@ -5,7 +5,11 @@
   flex-direction: column;
   align-items: center;
   gap: 15px;
-  padding-top: 120px;
+  padding-top: 80px;
+}
+.about h1.abt-heading{
+  font-size:5rem ;
+  color: white;
 }
 
 .about .abt-content {
@@ -33,6 +37,11 @@
 @media (max-width: 750px) {
   .about {
     width: 100vw;
+  }
+  .about h1.abt-heading {
+    font-size: 2rem;
+    width: 100%;
+    padding-left: 40px;
   }
   .about > .abt-content {
     width: 95vw;

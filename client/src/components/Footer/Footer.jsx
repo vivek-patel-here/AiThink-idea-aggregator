@@ -1,55 +1,49 @@
 import "./Footer.css";
-import { Link,useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 function Footer() {
-  const navigate= useNavigate()
+  const navigate = useNavigate();
 
   return (
     <div className="footer" id="footer">
-      <div className="footer-hero">
-        <img src="/logo.PNG" alt="" />
-        <p>AiThink</p>
+      <div className="footer-left">
+        <div className="footer-logo">
+          <img src="/logo.PNG" alt="" />
+          <p>AiThink</p>
+        </div>
+        <p>Idea to Reality</p>
+        <p className="footer-copyright">
+          <span>&copy; 2025 AiThink</span> <span>Made with ❤️ by Vivek </span>
+        </p>
       </div>
-      <div className="footer-content">
-        <ul>
-          <li onClick={()=>navigate("/home")} className="footer-link"> Homepage</li>
-          <li onClick={()=>navigate("/about")} className="footer-link">About</li>
-          <li onClick={()=>navigate("/demo/")} className="footer-link">Demo</li>
-        </ul>
-      </div>
-      <div className="footer-content footer-resp" >
-        <ul>
-          <li>GET IN TOUCH</li>
-          <li>+91 8595818416</li>
-          <li>vivek.patel.1057@gmail.com</li>
-        </ul>
-      </div>
-      <div className="footer-content">
-        <ul>
-          <li>
+      <div className="footer-right">
+        <div className="footer-div1">
+          <h6>Contact</h6>
+          <p>+91 8595818416</p>
+          <p>vivek.patel.1057@gmail.com</p>
+        </div>
+        <div className="footer-div2">
+          <h6>Social</h6>
+          <p>
             <a href="https://github.com/vivek-patel-here" target="_blank">
-              <i className="ri-github-fill"></i>
+              <i className="ri-github-fill"></i> GitHub
             </a>
-          </li>
-          <li>
+          </p>
+          <p>
             <a href="https://www.linkedin.com/in/vivek-patel2004/">
-              <i className="ri-linkedin-box-fill"></i>
+              <i className="ri-linkedin-box-fill"></i> LinkedIn
             </a>
-          </li>
-          <li>
-            <a href="">
-              <i className="ri-discord-fill"></i>
-            </a>
-          </li>
-        </ul>
-      </div>
-      <div className="footer-text">
-        <p>Copyright 2025 &copy; AiThink</p>
-      </div>
-      <div className="footer-text">
-        <p> Made with ❤️ by Vivek</p>
+          </p>
+        </div>
+        <div className="footer-div3">
+          <h6>Legal</h6>
+          <p>Privacy Policy</p>
+          <p>Terms of use</p>
+        </div>
       </div>
     </div>
   );
 }
 
 export default Footer;
+
+

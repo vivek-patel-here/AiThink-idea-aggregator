@@ -1,12 +1,14 @@
 import React from "react";
 import "./PageNotFound.css";
-import Navbar from "../../components/Navbar/Navbar";
-import Footer from "../../components/Footer/Footer";
+import { useContext } from "react";
+import GlobalContext from "../../GlobalContext.jsx";
+
 function PageNotFound() {
+
+  const {isAuth } =useContext(GlobalContext);
   return (
     <>
-      <div className = "pnf">
-        <Navbar />
+      <div className ={isAuth? "pnf color-white":"pnf color-black"}>
         <div class="container">
           <div class="emoji">🧠😵</div>
           <h1>404 – Idea Not Found!</h1>
@@ -20,7 +22,6 @@ function PageNotFound() {
           </div>
         </div>
       </div>
-      <Footer />
     </>
   );
 }

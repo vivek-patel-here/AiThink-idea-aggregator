@@ -8,33 +8,62 @@ import Footer from "../../components/Footer/Footer.jsx";
 
 function Home() {
   const [query, setQuery] = useState("");
-  const { ErrMsg,url } = useContext(GlobalContext);
+  const {
+    ErrMsg,
+    url,
+    ideas,
+    setIdeas,
+    keywords,
+    SetKeyword,
+    xpost,
+    setXPost,
+    redditPost,
+    setRedditPost,
+    topRepos,
+    setTopRepos,
+  } = useContext(GlobalContext);
   const handleChange = (e) => {
     setQuery(() => setQuery(e.target.value));
   };
   const [wait, setWait] = useState(false);
-  const [keywords, SetKeyword] = useState([]);
-  const [xpost, setXPost] = useState([]);
-  const [redditPost, setRedditPost] = useState([]);
-  const [topRepos, setTopRepos] = useState([]);
-  const [ideas, setIdeas] = useState([]);
+
+  const example = [
+    {
+      title: "Trend-Based Idea Suggestions",
+      query: "What are the latest AI project ideas trending on GitHub?",
+      description:
+        "Finds ideas from real-time trends on GitHub, Reddit, and other platforms — ideal for building cutting-edge projects.",
+      icon: "ri-line-chart-fill",
+    },
+    {
+      title: "Domain-Specific Ideas",
+      query: "Give me some AI project ideas in the healthcare domain.",
+      description:
+        "Generates ideas based on your preferred industry or domain, like education, finance, agriculture, etc.",
+      icon: "ri-heart-pulse-fill",
+    },
+    {
+      title: "Stack or Tool-Based Suggestions",
+      query: "Suggest projects I can build using React and Flask.",
+      description:
+        "Suggests creative and feasible project ideas tailored to the tools or tech stacks you want to work with.",
+      icon: "ri-tools-fill",
+    },
+  ];
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       setQuery("");
       setWait(true);
-      const response = await fetch(
-        `${url}/idea/new`,
-        {
-          method: "POST",
-          headers: {
-            "content-Type": "application/json",
-          },
-          body: JSON.stringify({ query: query }),
-          credentials: "include",
-        }
-      );
+      const response = await fetch(`${url}/idea/new`, {
+        method: "POST",
+        headers: {
+          "content-Type": "application/json",
+        },
+        body: JSON.stringify({ query: query }),
+        credentials: "include",
+      });
 
       const parsedResponse = await response.json();
       if (!response.ok || parsedResponse.success === false) {
@@ -80,9 +109,26 @@ function Home() {
               value={query}
               onChange={handleChange}
             />
-            {!wait && <button>Get Ideas</button>}
-            {wait && <div className="loader"></div>}
+            <div className="home-bottom-button">
+              {!wait && <button>Get Ideas</button>}
+              {wait && <div className="loader"></div>}
+            </div>
           </form>
+          {ideas && ideas.length == 0 && (
+            <div className="example">
+              {example.map((ex, i) => {
+                return (
+                  <ExampleCard
+                    title={ex.title}
+                    description={ex.description}
+                    query={ex.query}
+                    icon={ex.icon}
+                    key={i}
+                  />
+                );
+              })}
+            </div>
+          )}
         </div>
 
         {/* *************keywords************** */}
@@ -110,25 +156,11 @@ function Home() {
           <div className="home-section">
             <h4>RELATED IDEAS :</h4>
             <div className="home-row">
-              {ideas.map((post, i) => {
-                return (
-                  <div className="home-box" key={i}>
-                    <h3>{post.title}</h3>
-                    <p>
-                      <span className="highlight">Problem</span> :{" "}
-                      {post.problemSolved}
-                    </p>
-                    <p>
-                      <span className="highlight">Solution</span> :{" "}
-                      {post.description}
-                    </p>
-                    <p>
-                      <span className="highlight">Tech Stack</span> :{" "}
-                      {post.tech_Stack}
-                    </p>
-                  </div>
-                );
-              })}
+              {ideas &&
+                ideas.map((post, i) => {
+                  console.log(post)
+                  return <IdeaCard post={post} key={i} />;
+                })}
             </div>
           </div>
         )}
@@ -238,4 +270,69 @@ function Postcard({ name, owner, link, status, star, watch, isX }) {
   );
 }
 
+export function IdeaCard({ post }) {
+  const [saved, setSaved] = useState(false);
+  const { ErrMsg, url, successMsg } = useContext(GlobalContext);
+  const saveToDB = async () => {
+    try {
+      const response = await fetch(`${url}/idea/save`, {
+        method: "POST",
+        headers: {
+          "content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          problem: post.problemSolved,
+          techStack: post.tech_Stack,
+          title: post.title,
+          description: post.description,
+        }),
+        credentials: "include",
+      });
+
+      const parsedResponse = await response.json();
+      if (!response.ok || parsedResponse.success === false) {
+        setSaved(false);
+        return ErrMsg(
+          parsedResponse.message || "Unable to save this idea.Try Again"
+        );
+      }
+      setSaved(true);
+      successMsg("Idea saved successfully");
+    } catch (err) {
+      setSaved(false);
+      return ErrMsg("Unable to save this idea.Try Again");
+    }
+  };
+  return (
+    <div className="home-box">
+      <h3>{post.title}</h3>
+      <i
+        className={saved ? "ri-star-fill goldenStar" : "ri-star-fill"}
+        onClick={saveToDB}
+      ></i>
+      <p>
+        <span className="highlight">Problem</span> : {post.problemSolved}
+      </p>
+      <p>
+        <span className="highlight">Solution</span> : {post.description}
+      </p>
+      <p>
+        <span className="highlight">Tech Stack</span> : {post.tech_Stack}
+      </p>
+    </div>
+  );
+}
+
+function ExampleCard({ title, description, query, icon }) {
+  return (
+    <div className="example-card">
+      <button>
+        <i className={icon + " example-card-icon"}></i>
+      </button>
+      <h3>{title}</h3>
+      <p className="query-box">Query : {query}</p>
+      <p className="description-box">{description}</p>
+    </div>
+  );
+}
 export default Home;

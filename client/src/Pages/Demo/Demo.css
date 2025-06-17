@@ -5,42 +5,42 @@
   flex-direction: column;
   align-items: center;
   gap: 15px;
-  padding-top: 120px;
+  padding-top: 80px;
 }
 
+.demo .demo-hero{
+  border-bottom: 1px solid rgba(255, 255, 255, 0.24);
+}
 
-
-.demo .demo-content{
-    width: 900px;
+.demo .demo-content {
+  width: 900px;
   padding: 20px 40px;
   display: flex;
   flex-direction: column;
   gap: 10px;
   color: white;
   font-size: 1rem;
-  border-top: 1px solid rgba(128, 128, 128, 0.377);
 }
 
-.demo h3{
-  color:rgb(0, 128, 255);
+.demo h3 {
+  color: rgb(0, 128, 255);
 }
 
-
-.demo-content img{
+.demo-content img {
   margin: 20px 10px;
   width: 80%;
 }
 
-.demo .demo-content ul{
+.demo .demo-content ul {
   display: flex;
   flex-direction: column;
   gap: 100px;
 }
 
 .demo li {
-  list-style: none;}
+  list-style: none;
+}
 
-  
 @media (max-width: 750px) {
   .demo {
     width: 100vw;

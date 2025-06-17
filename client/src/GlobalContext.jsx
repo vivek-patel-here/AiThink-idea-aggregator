@@ -5,8 +5,15 @@ const GlobalContext = createContext();
 
 const GlobalContextProvider = ({ children }) => {
   const [isAuth, setIsAuth] = useState(false);
-  const [open,setOpen] =useState(false);
-  const url ="https://aithink-idea-aggregator-server.onrender.com"
+  const [ideas, setIdeas] = useState([]);
+  const [keywords, SetKeyword] = useState([]);
+  const [xpost, setXPost] = useState([]);
+  const [redditPost, setRedditPost] = useState([]);
+  const [topRepos, setTopRepos] = useState([]);
+  const [_ideas, set_Ideas] = useState([]);
+
+  // const url ="https://aithink-idea-aggregator-server.onrender.com"
+  const url = "http://localhost:8080";
 
   const ErrMsg = (msg) => {
     return toast.error(msg, {
@@ -32,6 +39,26 @@ const GlobalContextProvider = ({ children }) => {
       progress: undefined,
       theme: "light",
     });
+  };
+
+  const fetchIdeas = async () => {
+    try {
+      const response = await fetch(`${url}/idea/all`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+      });
+
+      const parsedResponse = await response.json();
+      if (!response.ok || parsedResponse.success == false) {
+        throw new Error(parsedResponse.message);
+      }
+      set_Ideas(parsedResponse.ideas);
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   const LogoutHandler = async () => {
@@ -80,11 +107,32 @@ const GlobalContextProvider = ({ children }) => {
     };
 
     checkAuth();
+    fetchIdeas();
   }, []);
 
   return (
     <GlobalContext.Provider
-      value={{ isAuth, setIsAuth, ErrMsg, successMsg, LogoutHandler ,open ,setOpen,url}}
+      value={{
+        isAuth,
+        setIsAuth,
+        ErrMsg,
+        successMsg,
+        LogoutHandler,
+        fetchIdeas,
+        url,
+        ideas,
+        setIdeas,
+        keywords,
+        SetKeyword,
+        xpost,
+        setXPost,
+        redditPost,
+        setRedditPost,
+        topRepos,
+        setTopRepos,
+        _ideas,
+        set_Ideas,
+      }}
     >
       {children}
     </GlobalContext.Provider>

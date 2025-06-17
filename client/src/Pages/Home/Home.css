@@ -7,6 +7,71 @@
   gap: 15px;
 }
 
+.home .example{
+  width: 90%;
+  height: fit-content;
+  margin: auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
+.home .example-card{
+  height: 160px;
+  width: 250px;
+  border-radius: 10px;
+  padding: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  color: black;
+  cursor: pointer;
+  background-color: #ffffff5e;
+  transition: transform 0.2s ease-in-out;
+}
+
+.home .example-card:hover{
+  transform: scale(1.05);
+}
+
+.home .example-card button{
+  font-size: 1.5rem;
+  padding: 2px 5px;
+  border-radius: 8px;
+  border: 1px solid white;
+}
+
+.home .example-card .query-box{
+  padding: 2px;
+  font-size: 0.8rem;
+  font-weight: 500
+}
+
+.home .example-card .description-box{
+  font-size: 0.7rem;
+  color: rgba(0, 0, 0, 0.774);
+}
+
+.home .example-card h3{
+  font-size: 0.9rem;
+}
+
+.home .home-section .home-row .home-box .ri-star-fill{
+  color: rgba(255, 255, 255, 0.226);
+  position: absolute;
+  top:1%;
+  font-size: 1.2rem;
+  cursor: pointer;
+  right: 1%;
+}
+
+.home .home-section .home-row .home-box .goldenStar{
+  color: goldenrod;
+}
+
 .home-container {
   height: fit-content;
   width: 80%;
@@ -35,33 +100,44 @@
   height: 70px;
   border-radius: 10px;
   padding: 10px 30px;
-  background-color: rgba(255, 255, 255, 0.178);
+  backdrop-filter:blur(10px);
+  background-color: rgba(255, 255, 255, 0.103);
   border-bottom: 1px solid rgba(255, 255, 255, 0.562);
   border-right: 1px solid rgba(255, 255, 255, 0.356);
-  backdrop-filter: blur(10px);
-  box-shadow: 0px 0px 20px rgba(255, 255, 255, 0.226);
-  display: flex;
+  display: grid;
   align-items: center;
-  justify-content: space-around;
+  grid-template-columns: 3fr 1fr;
 }
+
 .home-container .home-bottom input {
-  height: 90%;
-  width: 75%;
+  height: 70%;
   background-color: transparent;
   padding-left: 20px;
   color: white;
   border: none;
-  border-right: 1px solid white;
   outline: none;
+  border-right: 1px solid white;
 }
 
-.home-container .home-bottom button {
+.home-container .home-bottom .home-bottom-button {
+  height: 70%;
+  display: grid;
+  margin-left: 20px;
+  place-items: center;
+}
+
+.home-container .home-bottom .home-bottom-button button{
+  width: 85%;
+  font-size: 0.8rem;
   height: 40px;
-  width: 75px;
-  border-radius: 30px;
+  border-radius: 10px;
+  font-weight: 900;
   border: 1px solid white;
+  text-align: center;
   cursor: pointer;
 }
+
+
 
 .home .home-container > p {
   width: 50vw;
@@ -105,7 +181,7 @@
   display: flex;
   height: fit-content;
   width: 800px;
-  margin-bottom: 50px;
+  margin: 30px auto;
   flex-direction: column;
   gap: 10px;
 }
@@ -143,12 +219,15 @@
 }
 
 .home .home-box{
+  background-color: rgba(0, 0, 0, 0.288);
+  padding: 15px 5px;
   width: 700px;
   height: fit-content;
   display: flex;
   flex-wrap: wrap;
   color: white;
-  gap: 5px;
+  position: relative;
+  gap: 10px;
 }
 
 .home .home-git-container{
@@ -188,16 +267,10 @@
     line-height: 3.5rem;
   }
  .home-container .home-bottom {
-  width: 90vw;
+  width: 85vw;
   height: 50px;
-  gap: 5px;
-  justify-content: space-between;
-  padding: 10px 5px;
 }
- .home-container .home-bottom button{
-  height: fit-content;
-  padding: 5px 0px;
- }
+
 
  .home .home-section{
   width: 95vw;

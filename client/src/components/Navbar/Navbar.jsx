@@ -3,88 +3,74 @@ import "./Navbar.css";
 import { useContext, useState } from "react";
 import GlobalContext from "../../GlobalContext";
 function Navbar() {
-  const { LogoutHandler, open, setOpen } = useContext(GlobalContext);
+  const { LogoutHandler} = useContext(GlobalContext);
+  const [show, setShow] = useState(false);
+
+  const toggleMenu = () => {
+    setShow(!show);
+  }
+
   return (
     <>
-      <div className="navbar">
-        <div className="nav-icon-container">
-          <div className="nav-icon">
-            <i className="ri-planet-fill"></i>
-          </div>
-          <p>AiThink</p>
-        </div>
-        <ul>
-          <li>
-            <Link to="/home" >
-              Home
-            </Link>
-          </li>
-          <li>
-            <Link to="/about" >
-              About
-            </Link>
-          </li>
-
-          <li>
-            <Link to="/demo" >
-              Demo
-            </Link>
-          </li>
-
-          <li>
-            <a href="#footer">Get In Touch</a>
-          </li>
-
-          <button onClick={LogoutHandler}>
-            Logout
-          </button>
-        </ul>
-      </div>
-      {/*****************responsive design*********************/}
-      <div className="navbar-resp">
-        <input type="checkbox" id="toggle" />
-        <ul>
-          <div className="nav-icon-container">
+      <div className="navbar nav-blur">
+        <Link to="/" className="nav-logo">
             <div className="nav-icon">
               <i className="ri-planet-fill"></i>
             </div>
-            <p>AiThink</p>
-          </div>
-          <label htmlFor="toggle" className="close-btn">
-            <i className="ri-close-circle-fill"></i>
-          </label>
-          <li>
-            <Link to="/home" className="inner">
-              Home
-            </Link>
+        </Link>
+
+
+          {/*********desktop navbar options************/}
+        <ul className="nav-links">
+          <li >
+            <Link to="/home" >Home</Link>
           </li>
-          <li>
-            <Link to="/about" className="inner">
-              About
-            </Link>
+          <li >
+            <Link to="/about" >About</Link>
           </li>
 
-          <li>
-            <Link to="/demo" className="inner">
-              Demo
-            </Link>
+          <li >
+            <Link to="/demo" >Demo</Link>
           </li>
-          <li onClick={LogoutHandler}>
-            <a href="#">Logout</a>
+
+          <li >
+                 <Link to="/idea" >Ideas</Link>
           </li>
+
+          <button onClick={LogoutHandler}>Logout</button>
         </ul>
 
-        {!open && (
-          
-          <label htmlFor="toggle" id="menu">
-            <i className="ri-menu-2-line"></i>
-          </label>
-        )}
+
+          {/*********mobile navbar options************/}
+        <ul className={show?"nav-links-mobile":"nav-links-mobile-hide"}>
+          <li >
+            <Link to="/home" >Home</Link>
+          </li>
+          <li >
+            <Link to="/about" >About</Link>
+          </li>
+
+          <li >
+            <Link to="/demo" >Demo</Link>
+          </li>
+
+          <li >
+            <Link to="/idea" >Ideas</Link>
+          </li>
+
+          <button onClick={LogoutHandler}>Logout</button>
+        </ul>
+    
+
+        <div className="nav-btn">
+          <button className="nav-btn-mobile" onClick={toggleMenu}>
+            {show ? <i className="ri-close-fill"></i> : <i className="ri-menu-3-fill"></i>}
+          </button>
+        </div>
+
       </div>
     </>
   );
 }
-
-
 
 export default Navbar;

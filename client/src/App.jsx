@@ -8,6 +8,7 @@ import Auth from "./Pages/Auth/Auth.jsx";
 import PageNotFound from "./Pages/PageNotFound/PageNotFound.jsx";
 import Demo from "./Pages/Demo/Demo.jsx";
 import About from "./Pages/About/About.jsx";
+import Idea from "./Pages/Idea/Idea.jsx";
 import {
   ProtectedRoute,
   PublicRoute,
@@ -56,6 +57,16 @@ function App() {
             </ProtectedRoute>
           }
         />
+
+        <Route
+          path="/idea"
+          element={
+            <ProtectedRoute isAuth={isAuth}>
+              <Idea />
+            </ProtectedRoute>
+          }
+        />
+
         <Route path="*" element={<PageNotFound />} />
       </Routes>
       <ToastContainer

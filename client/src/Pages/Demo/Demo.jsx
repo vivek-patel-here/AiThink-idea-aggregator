@@ -7,7 +7,7 @@ function Demo() {
     <>
     <div className="demo" >
       <Navbar/>
-      <div className="demo-content" >
+      <div className="demo-content demo-hero" >
         <h1>Live Demo</h1>
         <p>
           Welcome to the Demo Page of AiThink ! Here, you can explore how the

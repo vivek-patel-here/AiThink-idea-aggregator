@@ -7,8 +7,8 @@ function About() {
     <>
     <div className="about">
       <Navbar />
+      <h1 className="abt-heading">DISCOVER NEW IDEAS</h1>
       <div className="abt-content">
-        <h1>About AiThink</h1>
         <p>
           Welcome to AiThink an Idea Aggregator — your one-stop destination for discovering
           innovative ideas, trending tech projects, and real-world inspiration

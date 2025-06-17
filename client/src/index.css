@@ -6,6 +6,11 @@
   scroll-behavior: smooth;
 }
 
+*::selection{
+  background-color: rgba(255, 255, 255, 0.3);
+  color: rgb(0, 0, 0);
+}
+
 
 body{
   height: 100vh;
