@@ -124,6 +124,7 @@ function Home() {
                     query={ex.query}
                     icon={ex.icon}
                     key={i}
+                    setQuery={setQuery}
                   />
                 );
               })}
@@ -135,7 +136,6 @@ function Home() {
         {keywords.length !== 0 && (
           <div className="row">
             <h4>RELATED KEYWORDS :</h4>
-            <Stack direction="row" spacing={1}>
               {keywords.map((word, i) => {
                 return (
                   <Chip
@@ -146,7 +146,6 @@ function Home() {
                   />
                 );
               })}
-            </Stack>
           </div>
         )}
 
@@ -323,9 +322,9 @@ export function IdeaCard({ post }) {
   );
 }
 
-function ExampleCard({ title, description, query, icon }) {
+function ExampleCard({ title, description, query, icon,setQuery }) {
   return (
-    <div className="example-card">
+    <div className="example-card" onClick={()=>setQuery(query)}>
       <button>
         <i className={icon + " example-card-icon"}></i>
       </button>
