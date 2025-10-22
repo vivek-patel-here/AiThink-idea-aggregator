@@ -133,11 +133,12 @@ Output strictly as JSON array only. Do not return explanations, greetings, or ad
     const parsedResp = await response.json();
     console.log("keyword extracted 😊")
 
-
     let keywords;
     try {
       keywords = JSON.parse(parsedResp.choices[0]["message"]["content"]);
     } catch (e) {
+      console.log(parsedResp)
+      throw new Error ("LLM rate limit exceeded !")
       keywords = parsedResp.choices[0]["message"]["content"];
     }
     const allkeyword = keywords.join("+");

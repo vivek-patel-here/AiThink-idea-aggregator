@@ -67,7 +67,8 @@ function Home() {
       const parsedResponse = await response.json();
       if (!response.ok || parsedResponse.success === false) {
         setWait(false);
-        return ErrMsg("Unable to process your request.Try Again");
+        console.log(parsedResponse)
+        return  ErrMsg("Unable to process your request.Try Again");
       }
       setWait(false);
       SetKeyword(parsedResponse.keywords);
