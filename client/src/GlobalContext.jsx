@@ -12,8 +12,8 @@ const GlobalContextProvider = ({ children }) => {
   const [topRepos, setTopRepos] = useState([]);
   const [_ideas, set_Ideas] = useState([]);
 
-  const url ="https://aithink-idea-aggregator-server.onrender.com"
-  // const url = "http://localhost:8080";
+  // const url ="https://aithink-idea-aggregator-server.onrender.com"
+  const url = "http://localhost:8080";
 
   const ErrMsg = (msg) => {
     return toast.error(msg, {

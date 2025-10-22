@@ -3,7 +3,6 @@ import { useContext, useState } from "react";
 import Navbar from "../../components/Navbar/Navbar.jsx";
 import GlobalContext from "../../GlobalContext.jsx";
 import Chip from "@mui/material/Chip";
-import Stack from "@mui/material/Stack";
 import Footer from "../../components/Footer/Footer.jsx";
 
 function Home() {
@@ -66,6 +65,7 @@ function Home() {
       });
 
       const parsedResponse = await response.json();
+      console.log(parsedResponse);
       if (!response.ok || parsedResponse.success === false) {
         setWait(false);
         return ErrMsg("Unable to process your request.Try Again");
@@ -273,6 +273,7 @@ export function IdeaCard({ post }) {
   const [saved, setSaved] = useState(false);
   const { ErrMsg, url, successMsg } = useContext(GlobalContext);
   const saveToDB = async () => {
+    if(saved) return;
     try {
       const response = await fetch(`${url}/idea/save`, {
         method: "POST",
@@ -310,13 +311,13 @@ export function IdeaCard({ post }) {
         onClick={saveToDB}
       ></i>
       <p>
-        <span className="highlight">Problem</span> : {post.problemSolved}
+        <span className="highlight">Problem</span> : {post.description}
       </p>
       <p>
-        <span className="highlight">Solution</span> : {post.description}
+        <span className="highlight">Solution</span> : {post.problem_solved}
       </p>
       <p>
-        <span className="highlight">Tech Stack</span> : {post.tech_Stack}
+        <span className="highlight">Tech Stack</span> : {post.tech_stack}
       </p>
     </div>
   );

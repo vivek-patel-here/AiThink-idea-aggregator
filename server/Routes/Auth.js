@@ -15,7 +15,7 @@ router.post(
   "/register",
   [
     body("username","Please Enter a valid username").isString().isLength({ min: 2 }),
-    body("email","Please enter a valid email").isEmail().trim(),
+    body("email","Please enter a valid email address").isEmail().trim(),
     body("password","Password must be 8 character long.").isString().isLength({ min: 8 }),
   ],
   validationReqBody,
@@ -25,7 +25,7 @@ router.post(
 router.post(
   "/login",
   [
-    body("email","Please Enetr a valida email").isEmail().trim(),
+    body("email","Please enter a valid email address !").isEmail().trim(),
     body("password","Password must be 8 character long.").isString().isLength({ min: 8 }),
   ],
   validationReqBody,

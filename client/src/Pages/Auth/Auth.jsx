@@ -145,15 +145,15 @@ function Auth() {
         </form>
         <div className="auth-divider">
           <hr />
-          <p>or Continue with</p>
-          <hr />
+          {/* <p></p>
+          <hr /> */}
         </div>
 
-        <div className="auth-icon-container">
+        {/* <div className="auth-icon-container">
           <i className="ri-google-fill"></i>
           <i className="ri-instagram-fill"></i>
           <i className="ri-github-fill"></i>
-        </div>
+        </div> */}
 
         <p className="auth-desc">
           Turn your problems into powerful projects. Discover trending ideas and
