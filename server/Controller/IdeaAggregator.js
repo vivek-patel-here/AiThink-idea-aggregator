@@ -230,10 +230,10 @@ Do not add any explanations, intro text, or finishing comments—only the JSON a
       ideas,
     });
   } catch (err) {
-    console.error("Gemini Error:", err);
+    console.error("LLM Error:", err);
     res.status(500).json({
       success: false,
-      message: "Failed to extract keywords using Gemini",
+      message: "Unable to process your Request! Try Again.",
       error: err.message,
     });
   }
