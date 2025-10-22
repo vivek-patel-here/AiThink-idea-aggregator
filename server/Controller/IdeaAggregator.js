@@ -211,7 +211,6 @@ Do not add any explanations, intro text, or finishing comments—only the JSON a
       })
     });
 
-    console.log("Ideas generated successfully !")
     let response2 = await result2.json();
     let ideas;
     try {
@@ -219,8 +218,8 @@ Do not add any explanations, intro text, or finishing comments—only the JSON a
     } catch (e) {
       ideas = response2.choices[0]["message"]["content"];
     }
-
-    console.log("ideas :", ideas);
+    
+    console.log("Ideas generated successfully !")
 
     return res.status(200).json({
       success: true,

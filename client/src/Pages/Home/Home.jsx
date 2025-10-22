@@ -65,7 +65,6 @@ function Home() {
       });
 
       const parsedResponse = await response.json();
-      console.log(parsedResponse);
       if (!response.ok || parsedResponse.success === false) {
         setWait(false);
         return ErrMsg("Unable to process your request.Try Again");
@@ -311,13 +310,13 @@ export function IdeaCard({ post }) {
         onClick={saveToDB}
       ></i>
       <p>
-        <span className="highlight">Problem</span> : {post.description}
+        <span className="highlight">Descrption</span> : {post.description}
       </p>
       <p>
-        <span className="highlight">Solution</span> : {post.problem_solved}
+        <span className="highlight">Problem Solved </span> : {post.problem_solved}
       </p>
       <p>
-        <span className="highlight">Tech Stack</span> : {post.tech_stack}
+        <span className="highlight">Suggested Tech Stack</span> : {post.tech_stack}
       </p>
     </div>
   );
