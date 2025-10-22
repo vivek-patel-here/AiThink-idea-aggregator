@@ -3,7 +3,6 @@ const { Idea } = require("../Models/Idea.Model.js");
 //function to fetch the relevent repositories from the github
 async function fetchTopGitHubRepos(keyword) {
   try {
-    console.log(process.env.GITHUB_TOKEN)
     const res = await fetch(
       `https://api.github.com/search/repositories?q=${encodeURIComponent(
         keyword
