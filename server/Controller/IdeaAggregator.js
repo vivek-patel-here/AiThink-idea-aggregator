@@ -219,6 +219,8 @@ Do not add any explanations, intro text, or finishing comments—only the JSON a
     } catch (e) {
       ideas = response2.choices[0]["message"]["content"];
     }
+
+    ideas = Array.isArray(ideas) ? ideas : [ideas];
     
     console.log("Ideas generated successfully !")
 
