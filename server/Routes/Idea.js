@@ -8,7 +8,7 @@ const { wrapAsync } = require("../Config/wrapAysnc.js");
 
 router.post(
   "/new",
-  IsAuthorized,
+  // IsAuthorized,
   [
     body(
       "query",

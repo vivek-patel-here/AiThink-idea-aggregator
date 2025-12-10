@@ -71,8 +71,8 @@ function Home() {
         return  ErrMsg("Unable to process your request.Try Again");
       }
       setWait(false);
-      SetKeyword(parsedResponse.keywords);
-      setIdeas(parsedResponse.ideas);
+      SetKeyword(parsedResponse.parsedKeywords);
+      setIdeas(parsedResponse.parsedIdeas);
       setRedditPost(parsedResponse.topRedditPost);
       setXPost(parsedResponse.topXpost);
       setTopRepos(parsedResponse.top_repos);
