@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useEffect, useState ,useContext } from "react";
 import { toast } from "react-toastify";
 
 const GlobalContext = createContext();
@@ -11,6 +11,11 @@ const GlobalContextProvider = ({ children }) => {
   const [redditPost, setRedditPost] = useState([]);
   const [topRepos, setTopRepos] = useState([]);
   const [_ideas, set_Ideas] = useState([]);
+  const [chats,setChats] = useState([]);
+  const [activeChatId,setActiveChatId] = useState(null)
+  const [messages,setMessages] = useState([]);
+   const [wait, setWait] = useState(false);
+   const [chatType,setChatType] = useState(true); //true ->general Chat ; false -> Idea Specific Chat
 
   const url ="https://aithink-idea-aggregator-server.onrender.com"
   // const url = "http://localhost:8080";
@@ -89,6 +94,25 @@ const GlobalContextProvider = ({ children }) => {
     }
   };
 
+  const fetchChats = async()=>{
+    try{
+      const resp = await fetch(`${url}/chat/all`,{
+        method:'GET',
+        headers:{
+          "content-type":"application/json"
+        },
+        credentials:"include"
+      })
+
+      const parsedResp = await resp.json();
+      if(parsedResp.success===false) return console.error(parsedResp.chats);
+      setChats(parsedResp.chats)// [{ id, topic description}]
+    }catch(err){
+      console.error(err);
+    }
+  }
+
+
   useEffect(() => {
     const checkAuth = async () => {
       try {
@@ -113,6 +137,7 @@ const GlobalContextProvider = ({ children }) => {
 
     checkAuth();
     fetchIdeas();
+    fetchChats();
   }, []);
 
   return (
@@ -137,6 +162,10 @@ const GlobalContextProvider = ({ children }) => {
         setTopRepos,
         _ideas,
         set_Ideas,
+        chats,
+        setChats,
+        activeChatId,setActiveChatId,messages,setMessages,
+        fetchChats,wait, setWait,chatType,setChatType
       }}
     >
       {children}
@@ -144,5 +173,6 @@ const GlobalContextProvider = ({ children }) => {
   );
 };
 
-export default GlobalContext;
+export const useGlobalContext=()=>useContext(GlobalContext);
 export { GlobalContextProvider };
+export default GlobalContext;

@@ -7,7 +7,8 @@ function Auth() {
   //true ->Sign-In and  false->Sign-Up
   const [pageState, setPageState] = useState(true);
   const navigate = useNavigate();
-  const { isAuth, setIsAuth, ErrMsg, successMsg,url } = useContext(GlobalContext);
+  const { isAuth, setIsAuth, ErrMsg, successMsg, url } = useContext(GlobalContext);
+  const [see,setSee] = useState(false);
 
   const [credentials, setCredentials] = useState({
     username: "",
@@ -71,7 +72,7 @@ function Auth() {
       }
 
       setIsAuth(true);
-      return successMsg(parsedResponse.message);
+      return successMsg("Welcome");
     } catch (err) {
       console.error(err);
       ErrMsg("Registration failed! Try again later.");
@@ -135,14 +136,20 @@ function Auth() {
             value={credentials.email}
             handler={handleChange}
           />
-          <AuthInput
-            placeholder={"Password"}
-            type={"password"}
-            name={"password"}
-            icon={<i className="ri-lock-line"></i>}
-            value={credentials.password}
-            handler={handleChange}
-          />
+
+          <div className="auth-input">
+            <div className="auth-icon"><i className="ri-lock-line"></i></div>
+            <input
+              type={see?"text":"password"}
+              placeholder={"Password"}
+              value={credentials.password}
+
+              name={"password"}
+              onChange={handleChange}
+            />
+            {see? <div className="auth-icon" onClick={()=>setSee(false)} ><i class="ri-eye-line"></i></div> : <div className="auth-icon" onClick={()=>setSee(true)}><i class="ri-eye-off-line"></i></div>}
+          </div>
+
           <button>{pageState ? "Sign In" : "Signup"}</button>
         </form>
         <div className="auth-divider">
@@ -166,7 +173,7 @@ function Auth() {
       <div className="auth-right">
         <h1>Ai Think</h1>
         <img src="/gradient.png" alt="" />
-        <Robot/>
+        <Robot />
       </div>
     </div>
   );
@@ -183,6 +190,7 @@ function AuthInput({ placeholder, type, name, icon, value, handler }) {
         name={`${name}`}
         onChange={handler}
       />
+     <div className="auth-icon"  ></div>
     </div>
   );
 }

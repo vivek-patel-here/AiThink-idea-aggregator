@@ -8,7 +8,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import { useNavigate } from "react-router-dom";
 
 function Idea() {
-  const { _ideas:ideas, fetchIdeas } = useContext(GlobalContext);
+  const { _ideas: ideas, fetchIdeas } = useContext(GlobalContext);
   const navigate = useNavigate();
   useEffect(() => {
     fetchIdeas();
@@ -48,7 +48,33 @@ function Idea() {
 }
 
 function IdeaCard({ idea }) {
-  const { url, successMsg, ErrMsg, fetchIdeas ,_ideas:ideas,set_Ideas} = useContext(GlobalContext);
+  const navigate = useNavigate();
+  const { url, successMsg, ErrMsg, fetchIdeas,chatType,setChatType, _ideas: ideas, set_Ideas , setActiveChatId,fetchChats ,setMessages} = useContext(GlobalContext);
+
+  const InitChat = async () => {
+    setChatType(false);
+    try {
+      const response = await fetch(`${url}/chat/init`, {
+        method: "POST",
+        headers: {
+          "content-type": "application/json"
+        },
+        body:JSON.stringify({idea:idea}),
+        credentials: "include"
+      });
+
+      const parsedResp = await response.json();
+      if(!parsedResp.success || !response.ok ){
+        console.error(parsedResp.message);
+      }
+      setActiveChatId(parsedResp.chat._id);
+      setMessages(parsedResp.chat.messages);
+      navigate('/chat');
+      fetchChats();
+    } catch (err) {
+      console.error(err);
+    }
+  }
 
   const destroyIdea = async () => {
     try {
@@ -63,10 +89,10 @@ function IdeaCard({ idea }) {
       const parsedResponse = await response.json();
 
       console.log(parsedResponse);
-      if (parsedResponse.success==false) {
+      if (parsedResponse.success == false) {
         return ErrMsg(parsedResponse.message);
       }
-      if(ideas.length==1){
+      if (ideas.length == 1) {
         set_Ideas([]);
       }
       fetchIdeas();
@@ -95,11 +121,17 @@ function IdeaCard({ idea }) {
         </p>
       </div>
 
+  <div className="expand">
+        <p className="blue sm">Duration : {idea.duration}</p>
+        <p className="blue sm">Type : {idea.projectType}</p>
+      </div>
       <div className="cardfooter">
-        <Button onClick={destroyIdea} variant="outlined" size="small" startIcon={<DeleteIcon />}>
+        <Button onClick={destroyIdea} variant="outlined" size="small" color="error" startIcon={<DeleteIcon />}>
           Delete
         </Button>
+        <Button variant="outlined" size="small" onClick={InitChat}> BrainStorm</Button>
       </div>
+    
     </div>
   );
 }

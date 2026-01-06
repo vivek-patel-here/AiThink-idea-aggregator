@@ -315,6 +315,8 @@ export function IdeaCard({ post }) {
           techStack: post.tech_stack,
           title: post.title,
           description: post.description,
+          duration:post.duration,
+          projectType:post.projectType
         }),
         credentials: "include",
       });
@@ -350,6 +352,10 @@ export function IdeaCard({ post }) {
       <p>
         <span className="highlight">Suggested Tech Stack</span> : {post?.tech_stack}
       </p>
+        <div className="expand">
+        <p className="blue sm">Duration : {post.duration}</p>
+        <p className="blue sm">Type : {post.projectType}</p>
+      </div>
     </div>
   );
 }

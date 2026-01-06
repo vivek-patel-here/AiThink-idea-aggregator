@@ -80,6 +80,17 @@
     color: rgb(0, 128, 255);
 }
 
+
+
+
+
+.idea .idea-card .cardfooter{
+  width:100%;
+  display: flex;
+  align-items:center ;
+  justify-content: space-between;
+}
+
 @media (max-width: 750px) {
   .idea .idea-heading {
     width: 80vw;

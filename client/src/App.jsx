@@ -6,13 +6,14 @@ import GlobalContext from "./GlobalContext.jsx";
 import Home from "./Pages/Home/Home.jsx";
 import Auth from "./Pages/Auth/Auth.jsx";
 import PageNotFound from "./Pages/PageNotFound/PageNotFound.jsx";
-import Demo from "./Pages/Demo/Demo.jsx";
+// import Demo from "./Pages/Demo/Demo.jsx";
 import About from "./Pages/About/About.jsx";
 import Idea from "./Pages/Idea/Idea.jsx";
 import {
   ProtectedRoute,
   PublicRoute,
 } from "./components/RouteGuard/RouteGuard.jsx";
+import Chats from "./Pages/Chats/Chats.jsx";
 function App() {
   const { isAuth } = useContext(GlobalContext);
   return (
@@ -42,13 +43,22 @@ function App() {
         />
 
         <Route
+          path="/chat"
+          element={
+            <ProtectedRoute isAuth={isAuth}>
+              <Chats/>
+            </ProtectedRoute>
+          }
+        />
+
+        {/* <Route
           path="/demo"
           element={
             <ProtectedRoute isAuth={isAuth}>
               <Demo />
             </ProtectedRoute>
           }
-        />
+        /> */}
         <Route
           path="/about"
           element={
