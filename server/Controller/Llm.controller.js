@@ -59,7 +59,9 @@ Return **only** a JSON array of objects, each following this exact structure:
     "title": "<Project Name>",
     "description": "<Compelling 1-2 sentence summary of the idea's functionality and user experience>",
     "problem_solved": "<Clear, specific problem addressed>",
-    "tech_stack": "<Detailed tech stack (e.g., 'Next.js + FastAPI + PostgreSQL + TensorFlow', 'React Native + Firebase + Teachable Machine')>"
+    "tech_stack": "<Detailed tech stack (e.g., 'Next.js + FastAPI + PostgreSQL + TensorFlow', 'React Native + Firebase + Teachable Machine')>",
+    "duration" : "Project Duration",
+    "projectType":"< enum[ "Hackathon","Personal Project" ,"Startup Idea"] >{any three of them}"
   }
 ]
 

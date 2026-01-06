@@ -8,7 +8,7 @@ const { wrapAsync } = require("../Config/wrapAysnc.js");
 
 router.post(
   "/new",
-  // IsAuthorized,
+  IsAuthorized,
   [
     body(
       "query",
@@ -29,6 +29,9 @@ router.post(
     body("techStack", "The tech stack is required.").isString(),
     body("title", "The title is required.").isString(),
     body("description", "The description is required.").isString(),
+    body("duration","Duration is required").isString(),
+    body("projectType","Project Type is required.").isString(),
+
   ],
   validationReqBody,
   wrapAsync(saveIdeaLogic)

@@ -2,11 +2,11 @@ const mongoose = require("mongoose");
 
 const IdeaSchema = new mongoose.Schema(
   {
-   title:{
-    type:String,
-    required: true,
-    trim: true,
-   },
+    title: {
+      type: String,
+      required: true,
+      trim: true,
+    },
     problem: {
       type: String,
       required: true,
@@ -16,9 +16,17 @@ const IdeaSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    techStack:{
-        type:String,
-        required:true
+    techStack: {
+      type: String,
+      required: true
+    },
+    duration: {
+      type: String,
+      required: true
+    },
+    projectType: {
+      type: String,
+      required: true
     },
     owner: {
       type: mongoose.Schema.Types.ObjectId,
@@ -26,7 +34,7 @@ const IdeaSchema = new mongoose.Schema(
       required: true,
     },
   }
-  
+
 );
 
 const Idea = mongoose.model("Idea", IdeaSchema);

@@ -11,5 +11,10 @@ const client2 = new OpenAI({
     baseURL: "https://api.groq.com/openai/v1",
 });
 
+const client3 = new OpenAI({
+    apiKey: process.env.LLMKey3,
+    baseURL: "https://api.groq.com/openai/v1",
+});
 
-module.exports = {client1 , client2};
+
+module.exports = {client1 , client2 ,client3};

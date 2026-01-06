@@ -34,7 +34,7 @@ const IdeaAggregateLogic = async (req, res) => {
 };
 
 const saveIdeaLogic = async (req, res) => {
-  const { problem, techStack, title, description } = req.body;
+  const { problem, techStack, title, description ,duration,projectType } = req.body;
   const owner = req.user._id;
 
   const newIdea = new Idea({
@@ -43,6 +43,8 @@ const saveIdeaLogic = async (req, res) => {
     description: description,
     techStack: techStack,
     owner: owner,
+    duration,
+    projectType
   });
 
   const savedIdea = await newIdea.save();
