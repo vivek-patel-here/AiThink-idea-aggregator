@@ -7,6 +7,8 @@ import Footer from "../../components/Footer/Footer.jsx";
 
 function Home() {
   const [query, setQuery] = useState("");
+  const [duration,setDuration] = useState("None");
+  const [radio,setRadio] = useState("Personal Project");
   const {
     ErrMsg,
     url,
@@ -21,9 +23,7 @@ function Home() {
     topRepos,
     setTopRepos,
   } = useContext(GlobalContext);
-  const handleChange = (e) => {
-    setQuery(() => setQuery(e.target.value));
-  };
+
   const [wait, setWait] = useState(false);
 
   const example = [
@@ -52,34 +52,35 @@ function Home() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if(query.trim()==="") return ErrMsg("Please enter valid query!")
+    if(duration==="None") return ErrMsg("Please select Project duration!");
+    setWait(true);
     try {
-      setQuery("");
-      setWait(true);
       const response = await fetch(`${url}/idea/new`, {
         method: "POST",
         headers: {
           "content-Type": "application/json",
         },
-        body: JSON.stringify({ query: query }),
+        body: JSON.stringify({ query: query ,projectType:radio,duration:duration }),
         credentials: "include",
       });
 
       const parsedResponse = await response.json();
       if (!response.ok || parsedResponse.success === false) {
         setWait(false);
-        console.log(parsedResponse)
-        return  ErrMsg("Unable to process your request.Try Again");
+        return ErrMsg("Unable to process your request.Try Again");
       }
-      setWait(false);
       SetKeyword(parsedResponse.parsedKeywords);
       setIdeas(parsedResponse.parsedIdeas);
       setRedditPost(parsedResponse.topRedditPost);
       setXPost(parsedResponse.topXpost);
       setTopRepos(parsedResponse.top_repos);
     } catch (err) {
-      setWait(false);
-      return ErrMsg("Unable to process your request.Try Again");
+      console.error(err);
+      ErrMsg("Unable to process your request.Try Again");
     }
+      setWait(false);
+      setQuery("");
   };
 
   return (
@@ -107,13 +108,43 @@ function Home() {
               name="query"
               required
               value={query}
-              onChange={handleChange}
+              onChange={(e) => setQuery(e.target.value)}
             />
             <div className="home-bottom-button">
               {!wait && <button>Get Ideas</button>}
               {wait && <div className="loader"></div>}
             </div>
           </form>
+
+          <div className="home-config">
+            <select name="project-duration" id="duration" className="home-config-select" value={duration} onChange={(e)=>{
+              console.log(e.target.value);
+              setDuration(e.target.value)}}>
+              <option value="None">Project Duration</option>
+              <option value="1-3 Days">1-3 Days</option>
+              <option value="1 Week">1 Week</option>
+              <option value="2 Weeks">2 Weeks</option>
+              <option value="3 Weeks">3 Weeks</option>
+              <option value="1 Months">1 Months</option>
+              <option value="2 Months">2 Months</option>
+              <option value="3 Months">3 Months</option>
+              <option value="4 Months">4 Months</option>
+              <option value="5 Months">5 Months</option>
+              <option value="6 Months">6 Months</option>
+              <option value="1 year">1 year</option>
+            </select>
+            <div className="home-config-inputs">
+            <div>
+              <input onChange={()=>setRadio("Personal Project")} checked={radio==="Personal Project"} type="radio" id="personal-Project" name="project-type" /> <label htmlFor="personal-Project" className="">Personal Project</label>
+            </div>
+            <div>
+              <input onChange={()=>setRadio("Hackathon")} checked={radio==="Hackathon"} type="radio" id="hackathons" name="project-type" /> <label htmlFor="hackathons" className="">Hackathon</label>
+            </div>
+            <div>
+              <input onChange={()=>setRadio("StartUp")} checked={radio==="StartUp"} type="radio" id="startups" name="project-type" /> <label htmlFor="startups" className="">StartUp</label>
+            </div>
+            </div>
+          </div>
           {ideas && ideas.length == 0 && (
             <div className="example">
               {example.map((ex, i) => {
@@ -136,16 +167,16 @@ function Home() {
         {keywords.length !== 0 && (
           <div className="row">
             <h4>RELATED KEYWORDS :</h4>
-              {keywords.map((word, i) => {
-                return (
-                  <Chip
-                    label={word.toUpperCase()}
-                    color="primary"
-                    variant="outlined"
-                    key={i}
-                  />
-                );
-              })}
+            {keywords.map((word, i) => {
+              return (
+                <Chip
+                  label={word.toUpperCase()}
+                  color="primary"
+                  variant="outlined"
+                  key={i}
+                />
+              );
+            })}
           </div>
         )}
 
@@ -155,9 +186,8 @@ function Home() {
           <div className="home-section">
             <h4>RELATED IDEAS :</h4>
             <div className="home-row">
-              {(ideas && ideas.length!==0 )&&
+              {(ideas && ideas.length !== 0) &&
                 ideas.map((post, i) => {
-                  console.log(post)
                   return <IdeaCard post={post} key={i} />;
                 })}
             </div>
@@ -256,7 +286,7 @@ function Postcard({ name, owner, link, status, star, watch, isX }) {
       <div className="card-body">{name}</div>
 
       <div className="card-bottom">
-        <a href={link}>
+        <a href={link} target="_blank">
           <Chip color="primary" label="Link" size="small" />
         </a>
         <p>{status}</p>
@@ -273,7 +303,7 @@ export function IdeaCard({ post }) {
   const [saved, setSaved] = useState(false);
   const { ErrMsg, url, successMsg } = useContext(GlobalContext);
   const saveToDB = async () => {
-    if(saved) return;
+    if (saved) return;
     try {
       const response = await fetch(`${url}/idea/save`, {
         method: "POST",
@@ -281,8 +311,8 @@ export function IdeaCard({ post }) {
           "content-Type": "application/json",
         },
         body: JSON.stringify({
-          problem: post.problemSolved,
-          techStack: post.tech_Stack,
+          problem: post.problem_solved,
+          techStack: post.tech_stack,
           title: post.title,
           description: post.description,
         }),
@@ -300,18 +330,19 @@ export function IdeaCard({ post }) {
       successMsg("Idea saved successfully");
     } catch (err) {
       setSaved(false);
+      console.error(err);
       return ErrMsg("Unable to save this idea.Try Again");
     }
   };
   return (
     <div className="home-box">
-      <h3>{post?.title}</h3>
+      <h3 >{post?.title}</h3>
       <i
         className={saved ? "ri-star-fill goldenStar" : "ri-star-fill"}
         onClick={saveToDB}
       ></i>
       <p>
-        <span className="highlight">Descrption</span> : {post?.description}
+        <span className="highlight">Idea</span> : {post?.description}
       </p>
       <p>
         <span className="highlight">Problem Solved </span> : {post?.problem_solved}
@@ -323,9 +354,9 @@ export function IdeaCard({ post }) {
   );
 }
 
-function ExampleCard({ title, description, query, icon,setQuery }) {
+function ExampleCard({ title, description, query, icon, setQuery }) {
   return (
-    <div className="example-card" onClick={()=>setQuery(query)}>
+    <div className="example-card" onClick={() => setQuery(query)}>
       <button>
         <i className={icon + " example-card-icon"}></i>
       </button>

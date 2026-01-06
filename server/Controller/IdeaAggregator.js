@@ -6,14 +6,14 @@ const {fetchTopXPost} = require("./FetchTwitterPost.controller.js");
 
 const IdeaAggregateLogic = async (req, res) => {
   try {
-    const { query } = req.body;
+    const { query,duration,projectType } = req.body;
     const keywords = await ExtractWord(query);  
     const parsedKeywords = JSON.parse(keywords); 
     const allKeywords = parsedKeywords.join('+');                   //Extracting relevent keyword from user query
     const top_repos = await fetchTopGitHubRepos(query);        //fetching github top rated repos.
     const topRedditPost = await fetchTopRedditPost(allKeywords);     //fetching top rated reddit post
     const topXpost = await fetchTopXPost(allKeywords);               // fetching top rated X-post
-    const ideas = await GenerateIdeas(top_repos,topRedditPost,topXpost,query,keywords);  
+    const ideas = await GenerateIdeas(top_repos,topRedditPost,topXpost,query,keywords,duration,projectType);  
     const parsedIdeas = JSON.parse(ideas);     //Actual Idea Fetching 
     return res.status(200).json({
       success: true,

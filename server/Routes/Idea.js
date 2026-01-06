@@ -14,6 +14,8 @@ router.post(
       "query",
       "The query should be meaningful and well-defined."
     ).isString(),
+    body("projectType","The projectType is required.").isString(),
+    body("duration","The Project duration is required.").isString(),
   ],
   validationReqBody,
   wrapAsync(IdeaAggregateLogic)

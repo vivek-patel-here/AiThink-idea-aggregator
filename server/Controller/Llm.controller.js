@@ -26,10 +26,10 @@ Return keywords as a JSON array: ["keyword1", "keyword2", ...]
 
 
 
-const GenerateIdeas = async(topGithubRepos , redditPosts , XPosts , user_query , keywords)=>{
+const GenerateIdeas = async(topGithubRepos , redditPosts , XPosts , user_query , keywords,duration,projectType)=>{
     const response = await client2.responses.create({
         model:"openai/gpt-oss-20b",
-        input:`You are an AI system that generates high-quality hackathon or startup project ideas.
+        input:`You are an AI system that generates high-quality ${projectType} ideas.
 
 Using the following inputs:
 - **User Prompt**: ${user_query}
@@ -37,12 +37,14 @@ Using the following inputs:
 - **GitHub Repositories**: ${topGithubRepos}
 - **Reddit Discussions**: ${redditPosts}
 - **Social Media (X)**: ${XPosts}
+- **Duration** : ${duration}
+- **ProjectType** : ${projectType}
 
 ### Task
 Generate **10-12 unique, innovative, and practical hackathon/startup ideas** directly inspired by the user prompt and enriched by insights from the GitHub repos, Reddit posts, and social media posts.
 
 ### Requirements
-1. Each idea must be **feasible within 1-2 weeks** of development.
+1. Each idea must be **feasible within ${duration}** of development.
 2. Every idea must use **at least one diverse tech stack combination** (frontend + backend, or AI/ML, IoT, blockchain, cloud, etc.).
 3. Each idea must focus on a **real-world problem** with clear value (avoid hyper-niche or trivial features).
 4. Ideas must be **distinct**—no overlapping or repetitive concepts.

@@ -105,7 +105,6 @@ const GlobalContextProvider = ({ children }) => {
           return setIsAuth(true);
         }
         setIsAuth(false);
-        ErrMsg(parsedResponse.message);
       } catch (err) {
         console.error(err);
         setIsAuth(false);

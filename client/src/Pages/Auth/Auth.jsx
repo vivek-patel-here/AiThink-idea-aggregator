@@ -44,6 +44,7 @@ function Auth() {
       setIsAuth(true);
       return successMsg(parsedResponse.message);
     } catch (err) {
+      console.error(err);
       ErrMsg("Login failed! Try again later.");
     }
   };
@@ -72,6 +73,7 @@ function Auth() {
       setIsAuth(true);
       return successMsg(parsedResponse.message);
     } catch (err) {
+      console.error(err);
       ErrMsg("Registration failed! Try again later.");
     }
   };

@@ -62,14 +62,19 @@
 .home .home-section .home-row .home-box .ri-star-fill{
   color: rgba(255, 255, 255, 0.226);
   position: absolute;
-  top:1%;
-  font-size: 1.2rem;
+  top:5%;
+  font-size: 1.5rem;
   cursor: pointer;
-  right: 1%;
+  right: 5%;
 }
 
 .home .home-section .home-row .home-box .goldenStar{
   color: goldenrod;
+}
+
+.home .home-section .home-row .home-box h3{
+  color: rgb(0, 85, 212);
+  width: 90%;
 }
 
 .home-container {
@@ -107,6 +112,8 @@
   display: grid;
   align-items: center;
   grid-template-columns: 3fr 1fr;
+
+
 }
 
 .home-container .home-bottom input {
@@ -220,14 +227,16 @@
 
 .home .home-box{
   background-color: rgba(0, 0, 0, 0.288);
-  padding: 15px 5px;
+  padding: 30px;
   width: 700px;
+  min-height: 300px;
   height: fit-content;
   display: flex;
   flex-wrap: wrap;
   color: white;
   position: relative;
   gap: 10px;
+  border-radius: 30px;
 }
 
 .home .home-git-container{
@@ -261,6 +270,44 @@
   gap: 15px;
 }
 
+.home-config{
+  width: 600px;
+  height:150px;
+  display: flex;
+  align-items: start;
+  justify-content: center;
+  flex-direction: column-reverse;
+  gap:30px;
+}
+
+.home-config-select{
+  color: white;
+  height: 40px;
+  width: 200px;
+  background-color: #0000006a;
+  outline:none;
+  border: none;
+  border-radius: 10px;
+  padding: 10px;
+}
+
+.home-config-inputs{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.home-config-inputs > div{
+  display: flex;
+  align-items:center;
+  justify-items: center;
+  gap: 10px;
+  color: white;
+}
+
+
+
 @media (max-width:800px) {
   .home .home-container h1{
     font-size: 2.5rem;
@@ -269,6 +316,7 @@
  .home-container .home-bottom {
   width: 80vw;
   height: 50px;
+
 }
 
 
@@ -286,6 +334,14 @@
 
  .home .home-container > p {
   width: 90vw;
+}
+
+.home .home-config{
+  width: 90vw;
+}
+
+.home-config-inputs{
+  font-size: smaller;
 }
 
 
