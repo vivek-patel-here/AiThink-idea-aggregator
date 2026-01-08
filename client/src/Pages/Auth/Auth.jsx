@@ -1,14 +1,14 @@
-import React, { useContext, useEffect, useState } from "react";
-import "./Auth.css";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import GlobalContext from "../../GlobalContext";
-import Robot from "../../components/3DRobot/Robot.jsx"
+import Spline from '@splinetool/react-spline';
+import { useGlobalContext } from "../../GlobalContext";
+import clsx from "clsx";
 function Auth() {
   //true ->Sign-In and  false->Sign-Up
   const [pageState, setPageState] = useState(true);
   const navigate = useNavigate();
-  const { isAuth, setIsAuth, ErrMsg, successMsg, url } = useContext(GlobalContext);
-  const [see,setSee] = useState(false);
+  const { isAuth, setIsAuth, ErrMsg, successMsg, url } = useGlobalContext();
+  const [see, setSee] = useState(false);
 
   const [credentials, setCredentials] = useState({
     username: "",
@@ -95,29 +95,28 @@ function Auth() {
   }, [isAuth]);
 
   return (
-    <div className="auth ">
-      <div className="auth-left ">
-        <h1 className="lg:hidden text-xl font-bol ">Ai Think</h1>
+    <div className=" w-screen h-screen flex items-center justify-center ">
+      <div className="h-full w-full lg:w-1/2  gap-5 flex flex-col items-center justify-center">
+          <h1 className="text-2xl font-semibold">Welcome to Ai Think</h1>
 
-        <div className="auth-txt">
-          <h1>Welcome Back</h1>
-          <p>Welcome Back , Please enter Your details</p>
-        </div>
-        <div className="auth-btn">
+
+
+        <div className="w-9/10 lg:w-7/10 h-15  border border-white rounded-xl flex items-center justify-between p-1 cursor-pointer gap-1 bg-neutral-100/90">
           <div
-            className={pageState === true ? "auth-btn-active" : ""}
+            className={ clsx("flex-1 h-full grid place-items-center  text-lg rounded-xl text-black",pageState === true && "bg-white" )}
             onClick={() => setPageState(true)}
           >
             Sign In
           </div>
           <div
-            className={pageState === false ? "auth-btn-active" : ""}
+            className={ clsx("flex-1 h-full grid place-items-center  text-lg rounded-xl text-black",pageState === false && "bg-white" )}
             onClick={() => setPageState(false)}
           >
             Signup
           </div>
         </div>
-        <form onSubmit={handleSubmit} className="mt-5">
+
+        <form onSubmit={handleSubmit} className=" h-fit flex flex-col gap-5  w-9/10  lg:w-7/10">
           {!pageState && (
             <AuthInput
               placeholder={"Username"}
@@ -137,43 +136,35 @@ function Auth() {
             handler={handleChange}
           />
 
-          <div className="auth-input">
-            <div className="auth-icon"><i className="ri-lock-line"></i></div>
+           <div className="w-full border border-white rounded-xl flex items-center gap-3 justify-between h-15 py-1 px-5">
+            <div  className="text-xl "><i className="ri-lock-line"></i></div>
             <input
-              type={see?"text":"password"}
+              type={see ? "text" : "password"}
               placeholder={"Password"}
+      className="flex-1 h-full outline-0 border-0 pl-2"
               value={credentials.password}
 
               name={"password"}
               onChange={handleChange}
             />
-            {see? <div className="auth-icon" onClick={()=>setSee(false)} ><i class="ri-eye-line"></i></div> : <div className="auth-icon" onClick={()=>setSee(true)}><i class="ri-eye-off-line"></i></div>}
+            {see ? <div className="text-xl" onClick={() => setSee(false)} ><i className="ri-eye-line"></i></div> : <div className="text-xl" onClick={() => setSee(true)}><i class="ri-eye-off-line"></i></div>}
           </div>
 
-          <button className="w-full  h-10 py-1 rounded-xl bg-linear-to-r from-cyan-400 font-bold to-violet-500">{pageState ? "Sign In" : "Signup"}</button>
+          <button className="w-full  h-15 py-1 rounded-xl bg-linear-to-r cursor-pointer from-cyan-400/50 text-xl to-violet-500/50 hover:from-cyan-400/60 hover:to-violet-500/60">{pageState ? "Sign In" : "Signup"}</button>
         </form>
-        <div className="auth-divider">
-          <hr />
-          {/* <p></p>
-          <hr /> */}
-        </div>
 
-        {/* <div className="auth-icon-container">
-          <i className="ri-google-fill"></i>
-          <i className="ri-instagram-fill"></i>
-          <i className="ri-github-fill"></i>
-        </div> */}
+        <hr />
 
-        <p className="auth-desc">
+        <p className="h-fit max-w-7/10 text-center">
           Turn your problems into powerful projects. Discover trending ideas and
           real-world solutions powered by AI from GitHub, Reddit, and Twitter.
         </p>
+
       </div>
 
-      <div className="auth-right">
-        <h1>Ai Think</h1>
-        <img src="/gradient.png" alt="" />
-        <Robot />
+      <div className=" h-full hidden lg:block w-full lg:w-1/2 relative">
+        <h1 className="absolute top-1/7 left-1/2  -translate-x-1/2 -translate-y-1/2 text-8xl font-bold"  >Ai Think</h1>
+        <Spline className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2' scene="https://prod.spline.design/loI3VkKl1eOfTQKi/scene.splinecode" />
       </div>
     </div>
   );
@@ -181,16 +172,17 @@ function Auth() {
 
 function AuthInput({ placeholder, type, name, icon, value, handler }) {
   return (
-    <div className="auth-input">
-      <div className="auth-icon"> {icon} </div>
+    <div className="w-full border border-white rounded-xl flex items-center gap-3 justify-between h-15 py-1 px-5">
+      <div className="text-xl "> {icon} </div>
       <input
+      className="flex-1 h-full outline-0 border-0 pl-2"
         type={`${type}`}
         placeholder={`${placeholder}`}
         value={value}
         name={`${name}`}
         onChange={handler}
       />
-     <div className="auth-icon"  ></div>
+      <div className="auth-icon"  ></div>
     </div>
   );
 }

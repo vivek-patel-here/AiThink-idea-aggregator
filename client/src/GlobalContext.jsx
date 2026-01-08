@@ -17,8 +17,8 @@ const GlobalContextProvider = ({ children }) => {
   const [general,setGeneral] =useState([]);
   const [wait, setWait] = useState(false);
 
-  // const url ="https://aithink-idea-aggregator-server.onrender.com"
-  const url = "http://localhost:8080";
+  const url ="https://aithink-idea-aggregator-server.onrender.com";
+  // const url = "http://localhost:8080";
 
   const ErrMsg = (msg) => {
     return toast.error(msg, {
