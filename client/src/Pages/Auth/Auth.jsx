@@ -43,7 +43,7 @@ function Auth() {
       }
 
       setIsAuth(true);
-      return successMsg(parsedResponse.message);
+      return successMsg("Welcome back.");
     } catch (err) {
       console.error(err);
       ErrMsg("Login failed! Try again later.");

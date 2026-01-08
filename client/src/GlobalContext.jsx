@@ -23,26 +23,26 @@ const GlobalContextProvider = ({ children }) => {
   const ErrMsg = (msg) => {
     return toast.error(msg, {
       position: "top-right",
-      autoClose: 2000,
-      hideProgressBar: false,
+      autoClose: 1500,
+      hideProgressBar: true,
       closeOnClick: false,
       pauseOnHover: true,
       draggable: true,
       progress: undefined,
-      theme: "light",
+      theme: "dark",
     });
   };
 
   const successMsg = (msg) => {
     return toast.success(msg, {
       position: "top-right",
-      autoClose: 2000,
-      hideProgressBar: false,
+      autoClose: 1500,
+      hideProgressBar: true,
       closeOnClick: false,
       pauseOnHover: true,
       draggable: true,
       progress: undefined,
-      theme: "light",
+      theme: "dark",
     });
   };
 

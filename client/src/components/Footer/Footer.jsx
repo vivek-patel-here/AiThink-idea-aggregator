@@ -2,7 +2,7 @@ import { Brain } from "lucide-react";
 
 function Footer() {
   return (
-    <footer className="relative bg-neutral-950/30 text-neutral-300 border-t border-white/10">
+    <footer className="relative bg-neutral-950/30 text-neutral-300 bg-linear-to-b from-transparent to-black/50">
       <div className="max-w-7xl mx-auto px-6 py-14 grid gap-10 md:grid-cols-4">
         {/* Brand */}
         <div className="space-y-4">
