@@ -5,7 +5,7 @@ const GlobalContext = createContext();
 
 const GlobalContextProvider = ({ children }) => {
   const [isAuth, setIsAuth] = useState(false);
-  const [ideas, setIdeas] = useState([]);
+  const [ideas, setIdeas] =  useState([]);
   const [keywords, SetKeyword] = useState([]);
   const [xpost, setXPost] = useState([]);
   const [redditPost, setRedditPost] = useState([]);
@@ -17,8 +17,8 @@ const GlobalContextProvider = ({ children }) => {
    const [wait, setWait] = useState(false);
    const [chatType,setChatType] = useState(true); //true ->general Chat ; false -> Idea Specific Chat
 
-  const url ="https://aithink-idea-aggregator-server.onrender.com"
-  // const url = "http://localhost:8080";
+  // const url ="https://aithink-idea-aggregator-server.onrender.com"
+  const url = "http://localhost:8080";
 
   const ErrMsg = (msg) => {
     return toast.error(msg, {

@@ -14,10 +14,11 @@ import {
   PublicRoute,
 } from "./components/RouteGuard/RouteGuard.jsx";
 import Chats from "./Pages/Chats/Chats.jsx";
+import clsx from "clsx";
 function App() {
   const { isAuth } = useContext(GlobalContext);
   return (
-    <div className={isAuth ? "app-login" : "app"}>
+    <div className={clsx("w-screen min-h-screen  text-white",isAuth ?"bg-[url(/bg4.jpeg)] bg-center bg-cover":"bg-white" )}>
       <Routes>
         <Route
           path="/"
