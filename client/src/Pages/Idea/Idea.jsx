@@ -85,7 +85,6 @@ function IdeaCard({ idea }) {
   } = useGlobalContext();
 
   const InitChat = async () => {
-    setChatType(false);
     try {
       const response = await fetch(`${url}/chat/init`, {
         method: "POST",
@@ -96,7 +95,6 @@ function IdeaCard({ idea }) {
 
       const parsedResp = await response.json();
       if (!parsedResp.success) return console.error(parsedResp.message);
-
       setActiveChatId(parsedResp.chat._id);
       setMessages(parsedResp.chat.messages);
       fetchChats();

@@ -9,15 +9,15 @@ const GetAllChats = async (req, res) => {
         if (!allChats) return res.status(500).json({ success: false, message: "Unable to get user chats!" });
         if (allChats.length === 0) return res.status(200).json({ success: true, message: "User chats retrieved.", chats: [] });
         const filteredChats = allChats.map((chat, idx) => {
-            return { id: chat._id, description: chat.idea?.description, problem: chat.idea?.problem ,title:chat.idea?.title};
+            return { id: chat._id, description: chat.idea?.description, problem: chat.idea?.problem, title: chat.idea?.title };
         })
         return res.status(200).json({ success: true, message: "User chats retrieved.", chats: filteredChats });
     } catch (err) {
         console.log("Error from getAllChats :\n", err);
         return res.status(500).json({
-    success: false,
-    message: "Failed to retrieve chats",
-  });
+            success: false,
+            message: "Failed to retrieve chats",
+        });
     }
 }
 
@@ -27,20 +27,21 @@ const ChatInit = async (req, res) => {
     try {
         const { email } = req.user;
         const { idea } = req.body;
-        const { problem, techStack, title, description,duration,projectType } = idea;
+        const { problem, techStack, title, description, duration, projectType } = idea;
         const findChat = await Chat.findOne({
             userEmail: email,
             idea: {
-                problem, techStack, title, description,duration,projectType
+                problem, techStack, title, description, duration, projectType
             }
         })
         if (findChat) return res.status(200).json({ success: true, chat: findChat, message: "Chat found." });
         const newChat = new Chat({
             userEmail: email,
             idea: {
-                problem, techStack, title, description ,duration,projectType
+                problem, techStack, title, description, duration, projectType
             },
-            messages: [{"role":"bot",message:`I’ve set up a workspace for "${title}".
+            messages: [{
+                "role": "bot", message: `I’ve set up a workspace for "${title}".
 
 From what I understand, the core problem is : 
 
@@ -61,9 +62,9 @@ How would you like to move forward? We can break down the architecture, plan fea
     catch (err) {
         console.log("Error in Chat_Init\n", err);
         return res.status(500).json({
-    success: false,
-    message: "Failed to retrieve chats",
-  });
+            success: false,
+            message: "Failed to retrieve chats",
+        });
     }
 }
 
@@ -75,28 +76,32 @@ const GetChat = async (req, res) => {
         if (!findChat) return res.status(404).json({ success: false, message: "Chat not found!" });
         return res.status(200).json({ success: true, message: "Chat found.", chat: findChat });
     } catch (err) {
-        console.log("Error in getChat" , err);
+        console.log("Error in getChat", err);
         return res.status(500).json({
-    success: false,
-    message: "Failed to retrieve chats",
-  });
+            success: false,
+            message: "Failed to retrieve chats",
+        });
     }
 }
 
 const DeleteChat = async (req, res) => {
-    try{
+    try {
         const { id } = req.params;
         const deletedChat = await Chat.findByIdAndDelete(id);
-        return res.status(200).json({ success: true, message: "Chat deleted." })
-    }catch(err){
-        console.log("Error in DeleteChat\n",err);
+        return res.status(200).json({ success: true, message: "Chat deleted.", chat: deletedChat });
+    } catch (err) {
+        console.log("Error in DeleteChat\n", err);
         return res.status(500).json({
-    success: false,
-    message: "Failed to retrieve chats",
-  });
+            success: false,
+            message: "Failed to retrieve chats",
+        });
     }
 }
 
+
+const fetchGeneralChatInit = async(req,res)=>{
+   
+}
 
 
 module.exports = { ChatInit, GetAllChats, GetChat, DeleteChat };

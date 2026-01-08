@@ -95,9 +95,9 @@ function Auth() {
   }, [isAuth]);
 
   return (
-    <div className="auth">
-      <div className="auth-left">
-        <h1>AiThink</h1>
+    <div className="auth ">
+      <div className="auth-left ">
+        <h1 className="lg:hidden text-xl font-bol ">Ai Think</h1>
 
         <div className="auth-txt">
           <h1>Welcome Back</h1>
@@ -117,7 +117,7 @@ function Auth() {
             Signup
           </div>
         </div>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className="mt-5">
           {!pageState && (
             <AuthInput
               placeholder={"Username"}
@@ -150,7 +150,7 @@ function Auth() {
             {see? <div className="auth-icon" onClick={()=>setSee(false)} ><i class="ri-eye-line"></i></div> : <div className="auth-icon" onClick={()=>setSee(true)}><i class="ri-eye-off-line"></i></div>}
           </div>
 
-          <button>{pageState ? "Sign In" : "Signup"}</button>
+          <button className="w-full  h-10 py-1 rounded-xl bg-linear-to-r from-cyan-400 font-bold to-violet-500">{pageState ? "Sign In" : "Signup"}</button>
         </form>
         <div className="auth-divider">
           <hr />

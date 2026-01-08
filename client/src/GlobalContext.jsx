@@ -14,8 +14,8 @@ const GlobalContextProvider = ({ children }) => {
   const [chats,setChats] = useState([]);
   const [activeChatId,setActiveChatId] = useState(null)
   const [messages,setMessages] = useState([]);
-   const [wait, setWait] = useState(false);
-   const [chatType,setChatType] = useState(true); //true ->general Chat ; false -> Idea Specific Chat
+  const [general,setGeneral] =useState([]);
+  const [wait, setWait] = useState(false);
 
   // const url ="https://aithink-idea-aggregator-server.onrender.com"
   const url = "http://localhost:8080";
@@ -165,7 +165,7 @@ const GlobalContextProvider = ({ children }) => {
         chats,
         setChats,
         activeChatId,setActiveChatId,messages,setMessages,
-        fetchChats,wait, setWait,chatType,setChatType
+        fetchChats,wait, setWait,general,setGeneral
       }}
     >
       {children}

@@ -18,7 +18,7 @@ import clsx from "clsx";
 function App() {
   const { isAuth } = useContext(GlobalContext);
   return (
-    <div className={clsx("w-screen min-h-screen  text-white",isAuth ?"bg-[url(/bg4.jpeg)] bg-center bg-cover":"bg-white" )}>
+    <div className={clsx("w-screen min-h-screen  text-white bg-[url(/bg4.jpeg)] bg-center bg-cover")}>
       <Routes>
         <Route
           path="/"
