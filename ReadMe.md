@@ -2,6 +2,8 @@
 
 A sleek, full-stack web app that brings together top tech ideas from GitHub, X (formerly Twitter), Reddit, and more—making it easier for developers and enthusiasts to stay inspired and discover what's trending in the world of tech and AI.
 
+Click Here 👉 [AI Think](https://ai-think-idea-aggregator.vercel.app)
+
 ![Screenshot](./client/public/Wallpaper.png)
 
 ##  Features
