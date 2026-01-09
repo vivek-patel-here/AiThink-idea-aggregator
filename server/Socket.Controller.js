@@ -47,7 +47,7 @@ const connectToSocket = (server) => {
                 });
                 const gptReponse = await client3.responses.create({
                     model: "openai/gpt-oss-120b",
-                    input: SystemPrompt(ideaRef,chatHistory[sessionKey])
+                    input: JSON.stringify(SystemPrompt(ideaRef,chatHistory[sessionKey])),
                 }
                 );
 
@@ -85,7 +85,7 @@ const connectToSocket = (server) => {
                 });
                 const gptReponse = await client3.responses.create({
                     model: "openai/gpt-oss-120b",
-                    input: generalChatSystemPrompt(chatHistory[sessionKey])
+                    input: JSON.stringify(generalChatSystemPrompt(chatHistory[sessionKey])),
                 }
                 );
 
