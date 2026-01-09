@@ -11,7 +11,7 @@ function PageNotFound() {
       <div className ="w-screen h-screen flex flex-col items-center justify-center text-center gap-5 ">
        
           <div className="text-5xl">🧠😵</div>
-          <h1 className="text-7xl">404 – Idea Not Found!</h1>
+          <h1 className="text-7xl">404 – Page Not Found!</h1>
           <p className="max-w-1/2 text-xl text-neutral-300">
             Looks like this page took a coffee break ☕<br />
             Or got lost in a rabbit hole of X posts and GitHub repos.

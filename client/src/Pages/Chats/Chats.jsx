@@ -71,7 +71,6 @@ function SideBar({ active, setActive, socketRef }) {
 
     const fetchPrevChat = async (id) => {
         setActiveChatId(id);
-        setChatType(false);
         try {
             const response = await fetch(`${url}/chat/${id}`, {
                 method: "GET",
@@ -147,7 +146,7 @@ function SideBar({ active, setActive, socketRef }) {
                             activeChatId === null
                                 ? "bg-cyan-400/20 text-cyan-400"
                                 : "hover:bg-white/10")} >
-                                    <p className=" h-full flex-1" onClick={() => setActiveChatId(null)}>General Chat</p>
+                                    <p className=" h-full flex-1" onClick={() => setActiveChatId(null)}>General Chat (Beta)</p>
                                     <RefreshCcw size={15} className="text-red-500" onClick={()=>ResetGeneralChat()}/>
                         
                     </li>
@@ -177,8 +176,13 @@ function SideBar({ active, setActive, socketRef }) {
 
 function MessagePanel() {
     const { messages, activeChatId, general } = useGlobalContext();
+    const scrollRef = useRef(null);
+    useEffect(() => {
+    scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
+  }, [messages]);
     return (
-        <div className="flex-1 overflow-y-auto px-4 py-6 space-y-4">
+        <div className="flex-1 relative overflow-y-auto px-4 py-6 space-y-4" ref={scrollRef}>
+            
             {activeChatId ?
                 messages.map((msg, idx) => (
                     <div
