@@ -64,7 +64,8 @@ A sleek, full-stack web app that brings together top tech ideas from GitHub, X (
 
 ```
 
-## Essential setting to bypass browser restriction (In case it doesnot work then , open the Developer Console → Network tab and check whether the request is being sent. Look for any requests marked with an exclamation icon.)
+## Essential setting to bypass browser restriction 
+(In case it doesnot work then , open the Developer Console → Network tab and check whether the request is being sent. Look for any requests marked with an exclamation icon.)
 ### For Google Chrome
 - go to `chrome://settings/cookies` or `Settings > Privacy and security > Third-party cookies`.
 - Ensure that `"Block third-party cookies"` or `"Block all cookies"` is NOT selected.
