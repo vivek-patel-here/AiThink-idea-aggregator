@@ -90,6 +90,7 @@ function Auth() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if(credentials.email.trim()==="" || credentials.password.trim()==="") return ErrMsg("Please enter valid credential!");
     if (pageState) {
       loginUser();
     } else {
