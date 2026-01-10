@@ -80,7 +80,7 @@ function IdeaCard({ post }) {
 
 function Home() {
   const [query, setQuery] = useState("");
-  const [duration, setDuration] = useState("None");
+  const [duration, setDuration] = useState("1 week");
   const [radio, setRadio] = useState("Personal Project");
   const {
     ErrMsg,
@@ -211,7 +211,7 @@ function Home() {
           </div>
         </div>
 
-        <div className="max-w-6/10 w-fit text-5xl lg:text-7xl my-10 font-bold text-center ">
+        <div className="w-9/10  lg:w-6/10 text-5xl lg:text-7xl my-10 font-bold text-center ">
           <h1>Revolutionizing</h1>
           <h1><span className="[text-shadow:0_0_10px_rgba(34,211,238,0.4)] bg-clip-text bg-linear-to-r from-cyan-400  to-violet-600 text-transparent">Brainstorming</span> with AI</h1>
         </div>
@@ -251,18 +251,20 @@ function Home() {
               <select name="project-duration" id="duration" className="text-white text-sm h-8 w-50 bg-white/15 outline-0 border-0 rounded p-1" value={duration} onChange={(e) => {
                 setDuration(e.target.value)
               }}>
-                <option value="None">Project Duration</option>
-                <option value="1-3 Days">1-3 Days</option>
-                <option value="1 Week">1 Week</option>
-                <option value="2 Weeks">2 Weeks</option>
-                <option value="3 Weeks">3 Weeks</option>
-                <option value="1 Months">1 Months</option>
-                <option value="2 Months">2 Months</option>
-                <option value="3 Months">3 Months</option>
-                <option value="4 Months">4 Months</option>
-                <option value="5 Months">5 Months</option>
-                <option value="6 Months">6 Months</option>
-                <option value="1 year">1 year</option>
+                <option value="">Project Duration</option>
+                <option value="1-2 days">1 to 2 Days</option>
+                <option value="3-4 days">3 to 4 Days</option>
+                <option value="1 week">1 Week</option>
+                <option value="2 weeks">2 Weeks</option>
+                <option value="3 weeks">3 Weeks</option>
+                <option value="1 month">1 Month</option>
+                <option value="2 months">2 Months</option>
+                <option value="3 months">3 Months</option>
+                <option value="4 months">4 Months</option>
+                <option value="5 months">5 Months</option>
+                <option value="6 months">6 Months</option>
+                <option value="1-year">1 Year</option>
+
               </select>
               {!wait ? <button className="text-sm h-8 px-2 rounded bg-cyan-400/35 text-cyan-400 cursor-pointer">Get Ideas</button>
                 : <ClipLoader
@@ -281,8 +283,8 @@ function Home() {
           <div className="flex flex-wrap w-full gap-10 my-30 items-center justify-center ">
             {example.map((ex, i) => {
               return (
-                <div className="bg-black/50 border border-white/10 w-fit h-fit p-px rounded-2xl">
-                  <div className=" flex rounded-2xl px-2 flex-col w-100 justify-center h-60 gap-2  items-center" onClick={() => setQuery(ex.query)}>
+                <div className="bg-black/50 border border-white/10 w-19/20 md:w-100 h-fit p-px rounded-2xl">
+                  <div className=" flex rounded-2xl px-2 flex-col w-full justify-center h-60 gap-2  items-center" onClick={() => setQuery(ex.query)}>
                     <div className="border h-10 w-10 rounded-xl border-cyan-400 text-cyan-400 grid place-items-center">
                       <ex.icon size={30} strokeWidth={3} />
                     </div>
@@ -315,7 +317,7 @@ function Home() {
         {/* *************Ideas************** */}
         {ideas.length !== 0 && (
           <div className="w-9/10  h-fit  my-10 p-2 ">
-            <div className="flex w-full items-center h-fit gap-5 ">
+            <div className="flex w-full flex-wrap items-center h-fit gap-5 ">
               {
                 options.map((op, i) => {
                   return <div key={i} className={clsx(" px-3 py-1.5 cursor-pointer rounded-3xl border flex items-center gap-3", active === op.option ? "bg-cyan-400/20 border-cyan-400/30 text-cyan-400 " : " border-white/20 bg-white/10")} onClick={() => setActive(op.option)}>
@@ -332,7 +334,7 @@ function Home() {
                   return <IdeaCard post={post} key={i} />;
                 })}
 
-              {(active === 2 && topRepos.length !== 0) && topRepos.map((repo, indx) => {
+              {(active === 2) && (topRepos.length!==0 ?( topRepos.map((repo, indx) => {
                 return (
                   <Postcard
                     key={indx}
@@ -345,9 +347,9 @@ function Home() {
                     isX={false}
                   />
                 );
-              })}
+              })):<p className="w-full h-20 flex items-center text-red-400 ">We couldn’t find any GitHub repositories related to your idea!</p>)}
 
-              {(active === 3 && xpost.length !== 0) && xpost.map((post, i) => {
+              {(active === 3) && (xpost.length!==0 ? (xpost.map((post, i) => {
                 return (
                   <Postcard
                     name={post.title}
@@ -360,9 +362,9 @@ function Home() {
                     isX={true}
                   />
                 );
-              })}
+              })):<p className="w-full h-20 flex items-center text-red-400 ">No matching X Post found for this idea!</p>)}
 
-              {(active === 4 && redditPost.length !== 0) && redditPost.map((post, i) => {
+              {(active === 4) && (redditPost.length!==0 ? (redditPost.map((post, i) => {
                 return (
                   <Postcard
                     name={post.title}
@@ -375,7 +377,7 @@ function Home() {
                     isX={false}
                   />
                 );
-              })}
+              })):<p className="w-full h-20 flex items-center text-red-400 ">Looks like there are no Reddit post related to this idea yet !</p>)}
             </div>
 
 
@@ -397,7 +399,7 @@ function Postcard({ name, owner, link, status, star, watch, isX }) {
         </p>
         <p>
           {star} {star && <i className="ri-star-s-fill"></i>}{" "}
-          {!status && !isX &&  <i className="ri-reddit-line text-orange-400 text-lg" />}
+          {!status && !isX && <i className="ri-reddit-line text-orange-400 text-lg" />}
         </p>
       </div>
 

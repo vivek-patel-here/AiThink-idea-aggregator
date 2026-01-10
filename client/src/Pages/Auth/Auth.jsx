@@ -3,12 +3,15 @@ import { useNavigate } from "react-router-dom";
 import Spline from '@splinetool/react-spline';
 import { useGlobalContext } from "../../GlobalContext";
 import clsx from "clsx";
+import { ClipLoader } from "react-spinners";
+
 function Auth() {
   //true ->Sign-In and  false->Sign-Up
   const [pageState, setPageState] = useState(true);
   const navigate = useNavigate();
   const { isAuth, setIsAuth, ErrMsg, successMsg, url } = useGlobalContext();
   const [see, setSee] = useState(false);
+  const [loader,setLoader] = useState(false);
 
   const [credentials, setCredentials] = useState({
     username: "",
@@ -23,6 +26,7 @@ function Auth() {
   };
 
   const loginUser = async () => {
+    setLoader(true);
     try {
       const response = await fetch(`${url}/auth/login`, {
         method: "POST",
@@ -47,10 +51,13 @@ function Auth() {
     } catch (err) {
       console.error(err);
       ErrMsg("Login failed! Try again later.");
+    }finally{
+      setLoader(false);
     }
   };
 
   const signupUser = async () => {
+    setLoader(true);
     try {
       const response = await fetch(`${url}/auth/register`, {
         method: "POST",
@@ -76,6 +83,8 @@ function Auth() {
     } catch (err) {
       console.error(err);
       ErrMsg("Registration failed! Try again later.");
+    }finally{
+      setLoader(false);
     }
   };
 
@@ -147,10 +156,17 @@ function Auth() {
               name={"password"}
               onChange={handleChange}
             />
-            {see ? <div className="text-xl" onClick={() => setSee(false)} ><i className="ri-eye-line"></i></div> : <div className="text-xl" onClick={() => setSee(true)}><i class="ri-eye-off-line"></i></div>}
+            {see ? <div className="text-xl" onClick={() => setSee(false)} ><i className="ri-eye-line"></i></div> : <div className="text-xl" onClick={() => setSee(true)}><i className="ri-eye-off-line"></i></div>}
           </div>
 
-          <button className="w-full  h-15 py-1 rounded-xl bg-linear-to-r cursor-pointer from-cyan-400/50 text-xl to-violet-500/50 hover:from-cyan-400/60 hover:to-violet-500/60">{pageState ? "Sign In" : "Signup"}</button>
+          {!loader ? <button className="w-full  h-15 py-1 rounded-xl bg-linear-to-r cursor-pointer from-cyan-400/50 text-xl to-violet-500/50 hover:from-cyan-400/60 hover:to-violet-500/60">{pageState ? "Sign In" : "Signup"}</button>:
+          <div className="w-full  h-15 py-1 grid place-items-center rounded-xl bg-linear-to-r cursor-pointer from-cyan-400/50 text-xl to-violet-500/50 hover:from-cyan-400/60 hover:to-violet-500/60">
+            <ClipLoader color={"white"}
+                  loading={loader}
+                  size={35}
+                  aria-label="Loading Spinner"
+                  data-testid="loader"
+                /></div>}
         </form>
 
         <hr />

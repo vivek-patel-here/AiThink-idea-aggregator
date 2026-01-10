@@ -1,20 +1,20 @@
-import { createContext, useEffect, useState ,useContext } from "react";
+import { createContext, useEffect, useState, useContext } from "react";
 import { toast } from "react-toastify";
 
 const GlobalContext = createContext();
 
 const GlobalContextProvider = ({ children }) => {
   const [isAuth, setIsAuth] = useState(false);
-  const [ideas, setIdeas] =  useState([]);
+  const [ideas, setIdeas] = useState([]);
   const [keywords, SetKeyword] = useState([]);
   const [xpost, setXPost] = useState([]);
   const [redditPost, setRedditPost] = useState([]);
   const [topRepos, setTopRepos] = useState([]);
   const [_ideas, set_Ideas] = useState([]);
-  const [chats,setChats] = useState([]);
-  const [activeChatId,setActiveChatId] = useState(null)
-  const [messages,setMessages] = useState([]);
-  const [general,setGeneral] =useState([]);
+  const [chats, setChats] = useState([]);
+  const [activeChatId, setActiveChatId] = useState(null)
+  const [messages, setMessages] = useState([]);
+  const [general, setGeneral] = useState([]);
   const [wait, setWait] = useState(false);
 
   const url ="https://aithink-idea-aggregator-server.onrender.com";
@@ -94,20 +94,20 @@ const GlobalContextProvider = ({ children }) => {
     }
   };
 
-  const fetchChats = async()=>{
-    try{
-      const resp = await fetch(`${url}/chat/all`,{
-        method:'GET',
-        headers:{
-          "content-type":"application/json"
+  const fetchChats = async () => {
+    try {
+      const resp = await fetch(`${url}/chat/all`, {
+        method: 'GET',
+        headers: {
+          "content-type": "application/json"
         },
-        credentials:"include"
+        credentials: "include"
       })
 
       const parsedResp = await resp.json();
-      if(parsedResp.success===false) return console.error(parsedResp.chats);
+      if (parsedResp.success === false) return console.error(parsedResp.chats);
       setChats(parsedResp.chats)// [{ id, topic description}]
-    }catch(err){
+    } catch (err) {
       console.error(err);
     }
   }
@@ -136,9 +136,13 @@ const GlobalContextProvider = ({ children }) => {
     };
 
     checkAuth();
+  }, []);
+
+  useEffect(() => {
+    if (!isAuth) return;
     fetchIdeas();
     fetchChats();
-  }, []);
+  }, [isAuth])
 
   return (
     <GlobalContext.Provider
@@ -164,8 +168,8 @@ const GlobalContextProvider = ({ children }) => {
         set_Ideas,
         chats,
         setChats,
-        activeChatId,setActiveChatId,messages,setMessages,
-        fetchChats,wait, setWait,general,setGeneral
+        activeChatId, setActiveChatId, messages, setMessages,
+        fetchChats, wait, setWait, general, setGeneral
       }}
     >
       {children}
@@ -173,6 +177,6 @@ const GlobalContextProvider = ({ children }) => {
   );
 };
 
-export const useGlobalContext=()=>useContext(GlobalContext);
+export const useGlobalContext = () => useContext(GlobalContext);
 export { GlobalContextProvider };
 export default GlobalContext;

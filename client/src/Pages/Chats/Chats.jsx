@@ -11,7 +11,7 @@ import { ClipLoader } from "react-spinners";
 import clsx from "clsx";
 
 function Chats() {
-    const [active, setActive] = useState(true);
+    const [active, setActive] = useState(false);
     const socketRef = useRef(null);
     const { activeChatId, url, fetchChats, setMessages, setGeneral } = useGlobalContext();
 
@@ -83,7 +83,7 @@ function SideBar({ active, setActive, socketRef }) {
             const parsedResp = await response.json();
 
             if (!parsedResp.success || !response.ok) {
-                return console.log(parsedResp.message);
+                return console.error(parsedResp.message);
             }
             setMessages(parsedResp.chat?.messages ?? []);
         }
@@ -107,7 +107,7 @@ function SideBar({ active, setActive, socketRef }) {
             const parsedResp = await response.json();
 
             if (!parsedResp.success || !response.ok) {
-                return console.log(parsedResp.message);
+                return console.error(parsedResp.message);
             }
             if (activeChatId === id) {
                 setActiveChatId(null);
@@ -146,7 +146,7 @@ function SideBar({ active, setActive, socketRef }) {
                             activeChatId === null
                                 ? "bg-cyan-400/20 text-cyan-400"
                                 : "hover:bg-white/10")} >
-                                    <p className=" h-full flex-1" onClick={() => setActiveChatId(null)}>General Chat (Beta)</p>
+                                    <p className=" h-full flex-1 " onClick={() => setActiveChatId(null)}>General Chat (Beta)</p>
                                     <RefreshCcw size={15} className="text-red-500" onClick={()=>ResetGeneralChat()}/>
                         
                     </li>
@@ -160,7 +160,7 @@ function SideBar({ active, setActive, socketRef }) {
                                 : "hover:bg-white/10"
                         )}
                         >
-                            <p className=" h-full flex-1" onClick={() => fetchPrevChat(chat.id)}>{chat.title}</p>
+                            <p className=" h-full w-8/10 " onClick={() => fetchPrevChat(chat.id)}>{chat?.title.length <26 ? chat.title : chat.title.slice(0,25)+"..."}</p>
                             <Trash2 size={15} className="text-red-500" onClick={() => DeleteChat(chat.id)} />
                         </li>
 
